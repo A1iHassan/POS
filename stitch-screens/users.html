@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Monolith POS | Staff Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-dim": "#43546a",
+                    "on-background": "#2a3439",
+                    "on-error-container": "#752121",
+                    "on-error": "#fff7f6",
+                    "inverse-primary": "#ffffff",
+                    "surface-bright": "#f7f9fb",
+                    "secondary": "#526074",
+                    "on-tertiary-fixed-variant": "#45566b",
+                    "on-primary-container": "#525151",
+                    "on-secondary-container": "#455367",
+                    "on-tertiary": "#f7f9ff",
+                    "outline": "#717c82",
+                    "on-primary": "#faf7f6",
+                    "surface-container-low": "#f0f4f7",
+                    "surface-variant": "#d9e4ea",
+                    "primary-container": "#e5e2e1",
+                    "secondary-dim": "#465468",
+                    "inverse-surface": "#0b0f10",
+                    "error-dim": "#4e0309",
+                    "outline-variant": "#a9b4b9",
+                    "secondary-container": "#d5e3fc",
+                    "secondary-fixed-dim": "#c7d5ed",
+                    "surface-container-high": "#e1e9ee",
+                    "on-surface-variant": "#566166",
+                    "on-secondary": "#f8f8ff",
+                    "surface-container-highest": "#d9e4ea",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed-variant": "#5c5b5b",
+                    "on-surface": "#2a3439",
+                    "primary": "#5f5e5e",
+                    "surface-container": "#e8eff3",
+                    "inverse-on-surface": "#9a9d9f",
+                    "tertiary-fixed-dim": "#b9cbe4",
+                    "tertiary-container": "#c7d9f3",
+                    "secondary-fixed": "#d5e3fc",
+                    "on-tertiary-fixed": "#28394e",
+                    "on-tertiary-container": "#3b4c61",
+                    "on-secondary-fixed": "#324053",
+                    "primary-dim": "#535252",
+                    "tertiary-fixed": "#c7d9f3",
+                    "tertiary": "#4f6076",
+                    "background": "#f7f9fb",
+                    "on-secondary-fixed-variant": "#4e5c71",
+                    "surface-dim": "#cfdce3",
+                    "primary-fixed-dim": "#d6d4d3",
+                    "error-container": "#fe8983",
+                    "surface-tint": "#5f5e5e",
+                    "error": "#9f403d",
+                    "on-primary-fixed": "#403f3f",
+                    "primary-fixed": "#e5e2e1",
+                    "surface": "#f7f9fb"
+            },
+            "borderRadius": {
+                    "none": "0px",
+                    "DEFAULT": "0px",
+                    "lg": "0px",
+                    "xl": "0px",
+                    "full": "0px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-manrope { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Zero radius override for all elements */
+        * { border-radius: 0px !important; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #717c82; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface flex overflow-hidden">
+<!-- Shared Component: SideNavBar -->
+<aside class="flex flex-col h-screen bg-slate-200 dark:bg-slate-800 h-full w-64 fixed left-0 top-0 rounded-none border-r-0 shrink-0">
+<!-- Brand Header -->
+<div class="p-6 flex flex-col gap-1">
+<span class="text-lg font-black text-slate-900 dark:text-white tracking-tighter uppercase font-headline">MONOLITH POS</span>
+<div class="flex items-center gap-2 mt-2">
+<div class="w-8 h-8 bg-surface-container-highest flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="close up professional portrait of a store manager in a clean modern office environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjwosxv_m7dHHb086iunpq8LTuUM_rrLVvwHYLe2gnwXhmkf0R3O575iElvKHApDY05wBJLog6VJ-iLTFMoNHGaAVtmw6eoevGaEwOtrLjWVNPeCzqsG0DJmKdLN7Vv8HD7T5DEqxfNge2sfmJlA1Pj05PSKJGVnFja7LPuCWv61JwPquoS1QMEkQcsWRZIPFNTCTIxR8zUHH721Nq0OTgjoODO4m-k3K5TznngNl0KxX21YOkmaKz7G0syyZ8_tZeDT_9ubmbqIw"/>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-bold font-manrope tracking-tight leading-none text-slate-800 dark:text-slate-100">Terminal 01</span>
+<span class="text-[10px] uppercase font-medium tracking-widest text-slate-500">Store Manager</span>
+</div>
+</div>
+</div>
+<div class="bg-slate-300 dark:bg-slate-700 w-full h-[1px]"></div>
+<!-- Navigation items -->
+<nav class="flex-1 mt-4 overflow-y-auto">
+<a class="text-slate-600 dark:text-slate-400 px-6 py-4 flex items-center gap-3 hover:bg-slate-300 dark:hover:bg-slate-700 transition-none group" href="#">
+<span class="material-symbols-outlined text-xl">point_of_sale</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Terminal</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 px-6 py-4 flex items-center gap-3 hover:bg-slate-300 dark:hover:bg-slate-700 transition-none group" href="#">
+<span class="material-symbols-outlined text-xl">receipt_long</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Transactions</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 px-6 py-4 flex items-center gap-3 hover:bg-slate-300 dark:hover:bg-slate-700 transition-none group" href="#">
+<span class="material-symbols-outlined text-xl">inventory_2</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Inventory</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 px-6 py-4 flex items-center gap-3 hover:bg-slate-300 dark:hover:bg-slate-700 transition-none group" href="#">
+<span class="material-symbols-outlined text-xl">monitoring</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Reports</span>
+</a>
+<!-- Active State: Customers (Mapped to Staff/User Mgmt) -->
+<a class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white border-l-4 border-slate-600 dark:border-slate-400 font-bold px-6 py-4 flex items-center gap-3 transition-none" href="#">
+<span class="material-symbols-outlined text-xl">group</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Customers</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 px-6 py-4 flex items-center gap-3 hover:bg-slate-300 dark:hover:bg-slate-700 transition-none group" href="#">
+<span class="material-symbols-outlined text-xl">settings</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Settings</span>
+</a>
+</nav>
+<!-- CTA -->
+<div class="p-6">
+<button class="w-full bg-primary py-3 text-on-primary text-xs font-bold uppercase tracking-widest hover:bg-primary-dim transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span>
+                New Transaction
+            </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 flex-1 h-screen flex flex-col bg-surface overflow-hidden">
+<!-- Header Section -->
+<header class="p-8 pb-4 flex justify-between items-end">
+<div>
+<h1 class="text-4xl font-extrabold font-manrope tracking-tighter text-on-surface uppercase">Staff Directory</h1>
+<p class="text-sm font-medium text-on-surface-variant mt-1 tracking-wide">User roles and permission management architecture.</p>
+</div>
+<div class="flex gap-4">
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline text-lg">search</span>
+<input class="bg-surface-container-low border-0 border-b-2 border-outline focus:border-secondary focus:ring-0 text-xs w-64 pl-10 h-10 placeholder:uppercase placeholder:tracking-widest" placeholder="Search UUID or Name..." type="text"/>
+</div>
+<button class="bg-secondary text-on-secondary px-6 h-10 text-xs font-bold uppercase tracking-widest flex items-center gap-2 hover:bg-secondary-dim transition-colors">
+<span class="material-symbols-outlined text-sm">person_add</span>
+                    Onboard Staff
+                </button>
+</div>
+</header>
+<!-- Primary Layout: Asymmetric Bento Grid -->
+<div class="flex-1 p-8 grid grid-cols-12 gap-6 overflow-y-auto">
+<!-- Staff List Module (Left 8 Columns) -->
+<section class="col-span-8 flex flex-col h-full bg-surface-container-low">
+<div class="bg-surface-container-high px-6 py-3 flex justify-between items-center">
+<span class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Active Directory Registry</span>
+<div class="flex items-center gap-4 text-[10px] uppercase font-bold text-outline">
+<span class="flex items-center gap-1"><span class="w-2 h-2 bg-green-600"></span> 14 Online</span>
+<span class="flex items-center gap-1"><span class="w-2 h-2 bg-slate-400"></span> 2 Offline</span>
+</div>
+</div>
+<div class="flex-1 overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-highest border-b border-outline-variant/15">
+<th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Identity</th>
+<th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-on-surface-variant">System Role</th>
+<th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Terminal Access</th>
+<th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Last Session</th>
+<th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-on-surface-variant text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- Row 1 -->
+<tr class="bg-surface-container-lowest hover:bg-white transition-colors cursor-pointer group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="portrait of a man with focused expression in a corporate environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAF5kOpDV85CQpfzVanvpy5ACV3VBUENOfJrFOpvmkdnkY0DjkPCJTk9bc6ZDXyXhwcP7_ij36V-H4RdDvtICdlTEGDA1fCyssb0ogg63zHJ-tzGfPaQN9ZDSViIa6SrdJGqfPLetkQPEPh5ldzTWySoLwVBPP91RFmcoSmmqy7zWCdEgfOd3IF7KC_K27eKg0REKbK3mgMc0fC_8-r_OZv5iPZJbbPh6wNvcAxXQuxoEpjETTmtpAizV19uyqR30qYRJgvRCmSsEo"/>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-bold font-manrope text-on-surface">Marcus Thorne</span>
+<span class="text-[10px] font-mono text-outline uppercase tracking-tighter">UID-9921-TX</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-[10px] font-bold uppercase tracking-widest px-2 py-1 bg-primary text-on-primary">System Admin</span>
+</td>
+<td class="px-6 py-4 text-xs font-medium text-on-surface-variant">All Terminals</td>
+<td class="px-6 py-4 text-xs font-medium text-on-surface-variant">14m ago</td>
+<td class="px-6 py-4 text-right">
+<button class="material-symbols-outlined text-outline hover:text-primary transition-colors">more_vert</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="bg-surface hover:bg-white transition-colors cursor-pointer group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="professional woman in business attire with clean background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkUx85yBbgi0eE6xajn-uZcJhGhT7CzDL_iva-V7jiqSG3Qlh5sWAWOs_5a0jAstRSAvKSCH7AGDpPhlCIuryd-AEwLQdzFAirKC99Nie-LoftCk2rt81RXs8CIDCG-nq0ldqyKEwSwVtyiyOJ_XFaeDibhmfRchgjitk2urjDVPSt6QFcSz4tJBzw4mPfoxHWGUAUkwmy2dFZ2ja_Mrf_5TZeG-mBI6u3FPvHgu3qfOiLTCUDaBz9IBsy9mz94bHtazeELMWAn0A"/>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-bold font-manrope text-on-surface">Elena Rodriguez</span>
+<span class="text-[10px] font-mono text-outline uppercase tracking-tighter">UID-1024-XP</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-[10px] font-bold uppercase tracking-widest px-2 py-1 bg-secondary-container text-on-secondary-container">Store Manager</span>
+</td>
+<td class="px-6 py-4 text-xs font-medium text-on-surface-variant">Terminals 01, 02</td>
+<td class="px-6 py-4 text-xs font-medium text-on-surface-variant">Active Now</td>
+<td class="px-6 py-4 text-right">
+<button class="material-symbols-outlined text-outline hover:text-primary transition-colors">more_vert</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="bg-surface-container-lowest hover:bg-white transition-colors cursor-pointer group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="man smiling professionally in a neutral studio background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6U-miHU2BsFakE4Bu0CYr6-V9TMrcBZOAdCFZS4OzRxTB_ikgUvPGwTMc4laLydi-sBdhYkeYMwlLJFqHuvoDTFEqMvcEmuLKQvvc8nLFSXqj4GnvQjiucK_eM07rjIdRlOA1wKPOmFMCl2u_6Uo2nYsIAlO_SfjG20ckRTp6DaSoSRVC-ORevog-77Z3U7bCqUpvKiLbnzNb-q5_ZoyEoYUPIj1tB31hfrjTB_ksgw7DeHDioE6CAaQeqLtgUuRdvMegdDds2mk"/>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-bold font-manrope text-on-surface">Julian Chen</span>
+<span class="text-[10px] font-mono text-outline uppercase tracking-tighter">UID-5542-BR</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-[10px] font-bold uppercase tracking-widest px-2 py-1 bg-surface-variant text-on-surface-variant">Cashier Senior</span>
+</td>
+<td class="px-6 py-4 text-xs font-medium text-on-surface-variant">Terminal 01</td>
+<td class="px-6 py-4 text-xs font-medium text-on-surface-variant">2h 45m ago</td>
+<td class="px-6 py-4 text-right">
+<button class="material-symbols-outlined text-outline hover:text-primary transition-colors">more_vert</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="bg-surface hover:bg-white transition-colors cursor-pointer group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="young professional woman in modern workspace setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgDM9KhNVTSUpkrrVN6BeGpYJqE_41a9_3qku8Ci2ZVtRZcccbvuHemi85hl4m9wturHnXRHPH1IGaX5gIVrrrJVgdmyxY89CuVj_p_A8z2838J5TPQcWk8RF8k3u2ctF5w0go3zD5EzeMQJggHDeLxZOJ1mM0h2lnYB0InOFZcR79sY9DRpgrIi1UEbDtC4YM78i8FMchztMnR1JiY1CnPUq2WnotsB0RWc24jwJhUPRF4N5A_KY2bFVoTbMBq9HDnPwSt2u7Yqg"/>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-bold font-manrope text-on-surface">Sarah Jenkins</span>
+<span class="text-[10px] font-mono text-outline uppercase tracking-tighter">UID-3301-LA</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-[10px] font-bold uppercase tracking-widest px-2 py-1 bg-surface-variant text-on-surface-variant">Cashier Junior</span>
+</td>
+<td class="px-6 py-4 text-xs font-medium text-on-surface-variant">Terminal 02</td>
+<td class="px-6 py-4 text-xs font-medium text-on-surface-variant">Active Now</td>
+<td class="px-6 py-4 text-right">
+<button class="material-symbols-outlined text-outline hover:text-primary transition-colors">more_vert</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="bg-surface-container-high px-6 py-4 flex justify-between items-center">
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Displaying 4 of 16 entries</span>
+<div class="flex gap-1">
+<button class="w-8 h-8 flex items-center justify-center bg-surface-container-lowest text-on-surface border border-outline-variant/15 text-[10px] font-bold">1</button>
+<button class="w-8 h-8 flex items-center justify-center bg-transparent hover:bg-surface-container-lowest text-on-surface-variant text-[10px] font-bold">2</button>
+<button class="w-8 h-8 flex items-center justify-center bg-transparent hover:bg-surface-container-lowest text-on-surface-variant text-[10px] font-bold">3</button>
+<button class="w-8 h-8 flex items-center justify-center bg-transparent hover:bg-surface-container-lowest text-on-surface-variant material-symbols-outlined text-sm">chevron_right</button>
+</div>
+</div>
+</section>
+<!-- Role Configuration Module (Right 4 Columns) -->
+<section class="col-span-4 flex flex-col gap-6 overflow-hidden">
+<!-- Permissions Overview -->
+<div class="bg-primary p-6 flex flex-col gap-6 text-on-primary h-fit">
+<div class="flex justify-between items-start">
+<span class="text-[10px] font-black uppercase tracking-widest opacity-80">Quick Config</span>
+<span class="material-symbols-outlined text-xl">admin_panel_settings</span>
+</div>
+<div>
+<h2 class="text-2xl font-bold font-manrope tracking-tighter leading-none uppercase">Role Hierarchies</h2>
+<p class="text-xs mt-2 opacity-80 leading-relaxed font-medium">Define granular access levels for terminal operations and financial reporting.</p>
+</div>
+<div class="space-y-4 pt-4 border-t border-on-primary/10">
+<div class="flex justify-between items-center">
+<span class="text-[10px] font-bold uppercase tracking-widest">Can Void Transaction</span>
+<div class="w-8 h-4 bg-on-primary/20 relative cursor-pointer">
+<div class="absolute right-0 top-0 w-4 h-4 bg-on-primary"></div>
+</div>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-[10px] font-bold uppercase tracking-widest">Access Cash Drawer</span>
+<div class="w-8 h-4 bg-on-primary/20 relative cursor-pointer">
+<div class="absolute right-0 top-0 w-4 h-4 bg-on-primary"></div>
+</div>
+</div>
+<div class="flex justify-between items-center opacity-50">
+<span class="text-[10px] font-bold uppercase tracking-widest">View Profit Margin</span>
+<div class="w-8 h-4 bg-on-primary/20 relative cursor-pointer">
+<div class="absolute left-0 top-0 w-4 h-4 bg-on-primary/40"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Active Role Details (Recessed Style) -->
+<div class="bg-surface-container-highest flex-1 p-6 flex flex-col gap-6 border-l-4 border-secondary">
+<div class="flex flex-col gap-1">
+<span class="text-[10px] font-black uppercase tracking-widest text-secondary">Operational Context</span>
+<h3 class="text-xl font-bold font-manrope text-on-surface uppercase tracking-tight">Security Audit</h3>
+</div>
+<div class="space-y-4">
+<div class="bg-surface-container-lowest p-4 flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Active Alerts</span>
+<span class="px-2 py-0.5 bg-error-container text-on-error-container text-[10px] font-black">02</span>
+</div>
+<p class="text-[11px] font-medium text-on-surface leading-tight">Unusual login pattern detected on Terminal 01 (UUID-5542-BR).</p>
+</div>
+<div class="bg-surface-container-lowest p-4 flex flex-col gap-2">
+<span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Recent Policy Change</span>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-secondary">history</span>
+<p class="text-[11px] font-medium text-on-surface leading-tight">MFA requirement enabled for "System Admin" group.</p>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-6 flex flex-col gap-3">
+<button class="w-full h-12 border-2 border-outline text-on-surface text-[10px] font-black uppercase tracking-widest hover:bg-surface-container-low transition-colors">Generate Access Logs</button>
+<button class="w-full h-12 bg-on-surface text-surface text-[10px] font-black uppercase tracking-widest hover:bg-black transition-colors">Update Global Policies</button>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Contextual "Help" Overlay (Brutalist Minimalist) -->
+<div class="fixed bottom-8 right-8 flex flex-col items-end gap-2">
+<div class="bg-on-surface text-surface text-[10px] font-bold uppercase tracking-widest py-2 px-4 shadow-xl mb-2 invisible group-hover:visible">System Documentation</div>
+<button class="w-12 h-12 bg-secondary text-on-secondary flex items-center justify-center hover:bg-secondary-dim transition-all group">
+<span class="material-symbols-outlined">question_mark</span>
+</button>
+</div>
+</body></html>

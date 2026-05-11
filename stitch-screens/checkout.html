@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Monolith POS - Checkout</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-dim": "#43546a",
+                        "on-background": "#2a3439",
+                        "on-error-container": "#752121",
+                        "on-error": "#fff7f6",
+                        "inverse-primary": "#ffffff",
+                        "surface-bright": "#f7f9fb",
+                        "secondary": "#526074",
+                        "on-tertiary-fixed-variant": "#45566b",
+                        "on-primary-container": "#525151",
+                        "on-secondary-container": "#455367",
+                        "on-tertiary": "#f7f9ff",
+                        "outline": "#717c82",
+                        "on-primary": "#faf7f6",
+                        "surface-container-low": "#f0f4f7",
+                        "surface-variant": "#d9e4ea",
+                        "primary-container": "#e5e2e1",
+                        "secondary-dim": "#465468",
+                        "inverse-surface": "#0b0f10",
+                        "error-dim": "#4e0309",
+                        "outline-variant": "#a9b4b9",
+                        "secondary-container": "#d5e3fc",
+                        "secondary-fixed-dim": "#c7d5ed",
+                        "surface-container-high": "#e1e9ee",
+                        "on-surface-variant": "#566166",
+                        "on-secondary": "#f8f8ff",
+                        "surface-container-highest": "#d9e4ea",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#5c5b5b",
+                        "on-surface": "#2a3439",
+                        "primary": "#5f5e5e",
+                        "surface-container": "#e8eff3",
+                        "inverse-on-surface": "#9a9d9f",
+                        "tertiary-fixed-dim": "#b9cbe4",
+                        "tertiary-container": "#c7d9f3",
+                        "secondary-fixed": "#d5e3fc",
+                        "on-tertiary-fixed": "#28394e",
+                        "on-tertiary-container": "#3b4c61",
+                        "on-secondary-fixed": "#324053",
+                        "primary-dim": "#535252",
+                        "tertiary-fixed": "#c7d9f3",
+                        "tertiary": "#4f6076",
+                        "background": "#f7f9fb",
+                        "on-secondary-fixed-variant": "#4e5c71",
+                        "surface-dim": "#cfdce3",
+                        "primary-fixed-dim": "#d6d4d3",
+                        "error-container": "#fe8983",
+                        "surface-tint": "#5f5e5e",
+                        "error": "#9f403d",
+                        "on-primary-fixed": "#403f3f",
+                        "primary-fixed": "#e5e2e1",
+                        "surface": "#f7f9fb"
+                    },
+                    "borderRadius": {
+                        "none": "0px",
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "0px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-manrope { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #717c82; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-secondary-container selection:text-on-secondary-container">
+<div class="flex h-screen overflow-hidden">
+<!-- SideNavBar - JSON Execution -->
+<aside class="flex flex-col h-screen h-full w-64 fixed left-0 top-0 rounded-none border-r-0 bg-slate-200 dark:bg-slate-800 z-50">
+<div class="p-6">
+<h1 class="text-lg font-black text-slate-900 dark:text-white tracking-tighter uppercase">MONOLITH POS</h1>
+<p class="text-xs font-medium uppercase tracking-widest font-inter text-slate-600 dark:text-slate-400 mt-1">Terminal 01</p>
+</div>
+<nav class="flex-1 mt-4">
+<!-- Active Tab: Terminal (Processing Transaction) -->
+<a class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white border-l-4 border-slate-600 dark:border-slate-400 font-bold px-6 py-4 flex items-center gap-3 transition-none" href="#">
+<span class="material-symbols-outlined">point_of_sale</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Terminal</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 px-6 py-4 flex items-center gap-3 hover:bg-slate-300 dark:hover:bg-slate-700 transition-none" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Transactions</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 px-6 py-4 flex items-center gap-3 hover:bg-slate-300 dark:hover:bg-slate-700 transition-none" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Inventory</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 px-6 py-4 flex items-center gap-3 hover:bg-slate-300 dark:hover:bg-slate-700 transition-none" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Reports</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 px-6 py-4 flex items-center gap-3 hover:bg-slate-300 dark:hover:bg-slate-700 transition-none" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Customers</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 px-6 py-4 flex items-center gap-3 hover:bg-slate-300 dark:hover:bg-slate-700 transition-none" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Settings</span>
+</a>
+</nav>
+<div class="p-4 bg-slate-300 dark:bg-slate-700">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 bg-slate-400 dark:bg-slate-600 rounded-none flex items-center justify-center overflow-hidden">
+<img alt="Store Manager" class="w-full h-full object-cover" data-alt="professional portrait of a man in business attire, clean grey studio background, sharp lighting, confident expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiYtaNeDqj-D0EQXzxNYc6Zjq9YMP9Cn1_GShumLTj3IfZB-o3Je6P5BpkfPySEKSNpYhtZs5u1AC7EjbjK-NCiSKx8mOgqJA4ZDll2t4CKRz9xfLQadfzjh54Z4_JLAVFWDHjSy2y6nqshKZQF6ge0qmzAiw9RcKfp7czh3tgLwaUFzoi1_MUSFytIpHsmKAMiEVBPuW47_YdsJHs4IH1d64rybc5QfqTZyNAV7UrwTEExpo2Yl19ypQMIQvyL_jRBE80_A3Npig"/>
+</div>
+<div>
+<p class="text-xs font-bold text-slate-900 dark:text-white uppercase font-inter">Manager</p>
+<p class="text-[10px] text-slate-600 dark:text-slate-400 font-inter">ID: 00921-X</p>
+</div>
+</div>
+<button class="w-full py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-bold uppercase tracking-widest font-inter hover:opacity-90 transition-opacity">
+                    Logout
+                </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-64 flex flex-col h-full bg-surface-container">
+<div class="flex h-full">
+<!-- Left Section: Order Processing -->
+<div class="flex-1 flex flex-col p-8 overflow-y-auto">
+<header class="mb-10">
+<div class="flex justify-between items-end">
+<div>
+<h2 class="text-3xl font-extrabold font-manrope tracking-tighter text-on-surface uppercase">Current Transaction</h2>
+<p class="text-sm font-medium text-on-surface-variant font-body">Order Ref: <span class="text-secondary">#TXN-8849-01</span></p>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 px-4 py-2 bg-surface-container-high hover:bg-surface-container-highest text-xs font-bold uppercase font-inter transition-all">
+<span class="material-symbols-outlined text-sm">person_add</span>
+                                    Add Customer
+                                </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-surface-container-high hover:bg-surface-container-highest text-xs font-bold uppercase font-inter transition-all">
+<span class="material-symbols-outlined text-sm">local_offer</span>
+                                    Discount
+                                </button>
+</div>
+</div>
+</header>
+<!-- Items List -->
+<div class="flex flex-col gap-[2px]">
+<!-- Column Headers -->
+<div class="flex px-6 py-3 bg-surface-container-highest text-[10px] font-black uppercase tracking-[0.15em] text-on-surface-variant font-label">
+<span class="flex-1">Product Description</span>
+<span class="w-24 text-center">Quantity</span>
+<span class="w-32 text-right">Unit Price</span>
+<span class="w-32 text-right">Subtotal</span>
+</div>
+<!-- Product Row -->
+<div class="flex items-center px-6 py-5 bg-surface-container-lowest border-l-4 border-secondary group hover:bg-white transition-all">
+<div class="flex-1 flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-low overflow-hidden">
+<img alt="Pro Runner Z2" class="w-full h-full object-cover" data-alt="vibrant red athletic sneaker side view, minimalist professional product photography, neutral grey background, sharp focus" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFOLP4fxgx-7y7pkqveMIN3qf5zxpNF5-1Q59C5FlQ-QLVBZfUcGO_in8rzzRnzbVrAx4GyiwuKO6_ttbN2swzyKKn4-3Y8Oc-FAscviaISmVrEPA817FrGDgXrQBaD81siCyfDuOAHQoiyKu9-B3WrjPEGnweCQyi2m3P2sKbLuHUXmkv4mEb0x-YOQ-oZm2PUAkAbjbkSQkyQSbUG03RTV-Yr8ETrpqTCzKf80ZbWi7MMn73XOHIczZySaCXef_hrGnBbrsPs3M"/>
+</div>
+<div>
+<h3 class="text-sm font-bold font-manrope text-on-surface">Pro Runner Z2 - Stealth Red</h3>
+<p class="text-[10px] font-medium text-secondary uppercase tracking-wider font-body">SKU: FTW-88190-R</p>
+</div>
+</div>
+<div class="w-24 flex items-center justify-center gap-4">
+<button class="w-6 h-6 flex items-center justify-center bg-surface-container-high hover:bg-secondary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<span class="text-sm font-black font-manrope">01</span>
+<button class="w-6 h-6 flex items-center justify-center bg-surface-container-high hover:bg-secondary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+<div class="w-32 text-right text-sm font-medium font-body text-on-surface-variant">$189.00</div>
+<div class="w-32 text-right text-sm font-black font-manrope text-on-surface">$189.00</div>
+</div>
+<!-- Product Row -->
+<div class="flex items-center px-6 py-5 bg-surface-container-low group hover:bg-white transition-all">
+<div class="flex-1 flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-low overflow-hidden">
+<img alt="Titanium Wristwatch" class="w-full h-full object-cover" data-alt="luxury silver titanium watch on a grey marble surface, moody lighting, professional product macro photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqy8BP4s96KS3VP-H5xHvtbdHKK8iVdxpfTP12wyU39GU6iWHgbnD19m_D6xxexx3bY9uTfNStuDHHMtISvePKKoVe6Md-5EHPbfHo4MsSKQHVzplqidgqFdMfbMNLzigR1mF9BoabIjU6iKZ9q1uRfiCaHMDahDG-OqnHWBN5hol8dFCHiPv2y58CqKyDY-9D9g1Og8j0Sm-N0ADLtrfmm-6v7MpIq0bErJYZA9upI7pOd9PJXmF10H6_afsh09qWTJD2a-QeFFM"/>
+</div>
+<div>
+<h3 class="text-sm font-bold font-manrope text-on-surface">Titan Series 01 - Chronograph</h3>
+<p class="text-[10px] font-medium text-secondary uppercase tracking-wider font-body">SKU: WCH-11200-S</p>
+</div>
+</div>
+<div class="w-24 flex items-center justify-center gap-4">
+<button class="w-6 h-6 flex items-center justify-center bg-surface-container-high hover:bg-secondary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<span class="text-sm font-black font-manrope">02</span>
+<button class="w-6 h-6 flex items-center justify-center bg-surface-container-high hover:bg-secondary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+<div class="w-32 text-right text-sm font-medium font-body text-on-surface-variant">$450.00</div>
+<div class="w-32 text-right text-sm font-black font-manrope text-on-surface">$900.00</div>
+</div>
+<!-- Product Row -->
+<div class="flex items-center px-6 py-5 bg-surface-container-lowest group hover:bg-white transition-all">
+<div class="flex-1 flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-low overflow-hidden">
+<img alt="Premium Audio Headphones" class="w-full h-full object-cover" data-alt="black studio headphones on a minimalist dark grey surface, high-end tech aesthetic, soft directional lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPsiofBDLnEZbZxNAGs8L3oayc4o_Fd4EbNeQ6bunpDWvmXmVNjQghGEDZxE7fE_-SwQPoGaCa9lwX-_og4Snf4JGfVQAQ-SU8b-G9mvz0IU_vS1rhdW9BKZ0P0n-NMq_HklO6Io_BIYLD2F-ymIU9ZHSFH0dnAScoHJRkwvE8bO43xQ8v1a-26nS--8-o9K3d94_2zpBFxrpSDqiwcEUw5fLDdY3eyk7wam_zx4GglRJnrTWHAMWmUv66qV3cSWYeYXeqg6yDJyQ"/>
+</div>
+<div>
+<h3 class="text-sm font-bold font-manrope text-on-surface">Studio-X Wireless Headphones</h3>
+<p class="text-[10px] font-medium text-secondary uppercase tracking-wider font-body">SKU: AUD-99201-B</p>
+</div>
+</div>
+<div class="w-24 flex items-center justify-center gap-4">
+<button class="w-6 h-6 flex items-center justify-center bg-surface-container-high hover:bg-secondary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<span class="text-sm font-black font-manrope">01</span>
+<button class="w-6 h-6 flex items-center justify-center bg-surface-container-high hover:bg-secondary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+<div class="w-32 text-right text-sm font-medium font-body text-on-surface-variant">$320.00</div>
+<div class="w-32 text-right text-sm font-black font-manrope text-on-surface">$320.00</div>
+</div>
+</div>
+<!-- Quick Add Section -->
+<div class="mt-8">
+<div class="p-6 bg-surface-container-low border-2 border-dashed border-outline-variant flex items-center justify-center gap-4 text-secondary hover:text-on-surface cursor-pointer group transition-colors">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">barcode_scanner</span>
+<span class="text-sm font-bold uppercase tracking-widest font-inter">Scan or Search Item (F2)</span>
+</div>
+</div>
+</div>
+<!-- Right Section: Summary & Payment -->
+<div class="w-[450px] bg-surface-container-high flex flex-col shadow-[-20px_0_40px_-20px_rgba(0,0,0,0.05)] z-10">
+<div class="p-8 flex-1 overflow-y-auto">
+<h2 class="text-xl font-extrabold font-manrope tracking-tighter text-on-surface uppercase mb-8 pb-4 border-b border-outline-variant/30">Order Summary</h2>
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<span class="text-xs font-medium uppercase tracking-widest font-inter text-secondary">Subtotal</span>
+<span class="text-sm font-bold font-manrope">$1,409.00</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-xs font-medium uppercase tracking-widest font-inter text-secondary">Tax (8.5%)</span>
+<span class="text-sm font-bold font-manrope">$119.77</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-xs font-medium uppercase tracking-widest font-inter text-secondary">Eco Fee</span>
+<span class="text-sm font-bold font-manrope">$2.50</span>
+</div>
+<div class="pt-6 mt-4 border-t-2 border-primary-dim">
+<div class="flex justify-between items-end">
+<span class="text-xs font-black uppercase tracking-widest font-inter text-on-surface">Total Amount Due</span>
+<span class="text-4xl font-extrabold font-manrope tracking-tighter text-on-surface">$1,531.27</span>
+</div>
+</div>
+</div>
+<!-- Payment Methods -->
+<div class="mt-12">
+<h3 class="text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant font-label mb-4">Payment Method</h3>
+<div class="grid grid-cols-2 gap-3">
+<button class="flex flex-col items-center justify-center gap-3 p-6 bg-white border-2 border-secondary text-secondary hover:bg-secondary hover:text-white transition-all">
+<span class="material-symbols-outlined text-3xl">payments</span>
+<span class="text-[10px] font-bold uppercase tracking-widest font-inter">Cash</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-3 p-6 bg-primary text-on-primary hover:bg-primary-dim transition-all ring-4 ring-primary/20">
+<span class="material-symbols-outlined text-3xl">credit_card</span>
+<span class="text-[10px] font-bold uppercase tracking-widest font-inter">Credit Card</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-3 p-6 bg-white border border-outline-variant text-on-surface-variant hover:border-secondary hover:text-secondary transition-all">
+<span class="material-symbols-outlined text-3xl">qr_code_2</span>
+<span class="text-[10px] font-bold uppercase tracking-widest font-inter">Mobile Pay</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-3 p-6 bg-white border border-outline-variant text-on-surface-variant hover:border-secondary hover:text-secondary transition-all">
+<span class="material-symbols-outlined text-3xl">account_balance_wallet</span>
+<span class="text-[10px] font-bold uppercase tracking-widest font-inter">Store Credit</span>
+</button>
+</div>
+</div>
+<!-- Quick Keypad -->
+<div class="mt-8 grid grid-cols-3 gap-1 bg-surface-container-highest p-1">
+<button class="py-4 bg-white text-lg font-bold font-manrope hover:bg-surface-container-low transition-colors">1</button>
+<button class="py-4 bg-white text-lg font-bold font-manrope hover:bg-surface-container-low transition-colors">2</button>
+<button class="py-4 bg-white text-lg font-bold font-manrope hover:bg-surface-container-low transition-colors">3</button>
+<button class="py-4 bg-white text-lg font-bold font-manrope hover:bg-surface-container-low transition-colors">4</button>
+<button class="py-4 bg-white text-lg font-bold font-manrope hover:bg-surface-container-low transition-colors">5</button>
+<button class="py-4 bg-white text-lg font-bold font-manrope hover:bg-surface-container-low transition-colors">6</button>
+<button class="py-4 bg-white text-lg font-bold font-manrope hover:bg-surface-container-low transition-colors">7</button>
+<button class="py-4 bg-white text-lg font-bold font-manrope hover:bg-surface-container-low transition-colors">8</button>
+<button class="py-4 bg-white text-lg font-bold font-manrope hover:bg-surface-container-low transition-colors">9</button>
+<button class="py-4 bg-white text-lg font-bold font-manrope hover:bg-surface-container-low transition-colors">C</button>
+<button class="py-4 bg-white text-lg font-bold font-manrope hover:bg-surface-container-low transition-colors">0</button>
+<button class="py-4 bg-white text-lg font-bold font-manrope hover:bg-surface-container-low transition-colors">.</button>
+</div>
+</div>
+<!-- Final CTA -->
+<div class="p-8 bg-surface-container-highest border-t border-outline-variant/30">
+<div class="flex gap-4">
+<button class="flex-1 py-5 bg-white border border-primary text-primary text-xs font-black uppercase tracking-[0.2em] font-inter hover:bg-primary-container transition-all">
+                                Hold Order
+                            </button>
+<button class="flex-[2] py-5 bg-primary text-on-primary text-xs font-black uppercase tracking-[0.2em] font-inter hover:bg-primary-dim shadow-xl transition-all">
+                                Complete Transaction
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

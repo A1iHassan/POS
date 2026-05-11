@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Monolith POS - Dashboard</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-dim": "#43546a",
+                    "on-background": "#2a3439",
+                    "on-error-container": "#752121",
+                    "on-error": "#fff7f6",
+                    "inverse-primary": "#ffffff",
+                    "surface-bright": "#f7f9fb",
+                    "secondary": "#526074",
+                    "on-tertiary-fixed-variant": "#45566b",
+                    "on-primary-container": "#525151",
+                    "on-secondary-container": "#455367",
+                    "on-tertiary": "#f7f9ff",
+                    "outline": "#717c82",
+                    "on-primary": "#faf7f6",
+                    "surface-container-low": "#f0f4f7",
+                    "surface-variant": "#d9e4ea",
+                    "primary-container": "#e5e2e1",
+                    "secondary-dim": "#465468",
+                    "inverse-surface": "#0b0f10",
+                    "error-dim": "#4e0309",
+                    "outline-variant": "#a9b4b9",
+                    "secondary-container": "#d5e3fc",
+                    "secondary-fixed-dim": "#c7d5ed",
+                    "surface-container-high": "#e1e9ee",
+                    "on-surface-variant": "#566166",
+                    "on-secondary": "#f8f8ff",
+                    "surface-container-highest": "#d9e4ea",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed-variant": "#5c5b5b",
+                    "on-surface": "#2a3439",
+                    "primary": "#5f5e5e",
+                    "surface-container": "#e8eff3",
+                    "inverse-on-surface": "#9a9d9f",
+                    "tertiary-fixed-dim": "#b9cbe4",
+                    "tertiary-container": "#c7d9f3",
+                    "secondary-fixed": "#d5e3fc",
+                    "on-tertiary-fixed": "#28394e",
+                    "on-tertiary-container": "#3b4c61",
+                    "on-secondary-fixed": "#324053",
+                    "primary-dim": "#535252",
+                    "tertiary-fixed": "#c7d9f3",
+                    "tertiary": "#4f6076",
+                    "background": "#f7f9fb",
+                    "on-secondary-fixed-variant": "#4e5c71",
+                    "surface-dim": "#cfdce3",
+                    "primary-fixed-dim": "#d6d4d3",
+                    "error-container": "#fe8983",
+                    "surface-tint": "#5f5e5e",
+                    "error": "#9f403d",
+                    "on-primary-fixed": "#403f3f",
+                    "primary-fixed": "#e5e2e1",
+                    "surface": "#f7f9fb"
+            },
+            "borderRadius": {
+                    "none": "0px",
+                    "DEFAULT": "0px",
+                    "lg": "0px",
+                    "xl": "0px",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<div class="flex h-screen overflow-hidden">
+<!-- SideNavBar (Execution from JSON) -->
+<aside class="flex flex-col h-screen h-full w-64 fixed left-0 top-0 rounded-none border-r-0 bg-slate-200 dark:bg-slate-800 z-50">
+<div class="p-6">
+<div class="text-lg font-black text-slate-900 dark:text-white tracking-tighter uppercase mb-1">MONOLITH POS</div>
+<div class="text-xs font-medium uppercase tracking-widest font-inter text-slate-600 dark:text-slate-400">Terminal 01</div>
+</div>
+<nav class="flex-grow">
+<!-- Terminal (Active) -->
+<a class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white border-l-4 border-slate-600 dark:border-slate-400 font-bold px-6 py-4 flex items-center gap-3 transition-none" href="#">
+<span class="material-symbols-outlined">point_of_sale</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Terminal</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 px-6 py-4 flex items-center gap-3 hover:bg-slate-300 dark:hover:bg-slate-700 transition-none" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Transactions</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 px-6 py-4 flex items-center gap-3 hover:bg-slate-300 dark:hover:bg-slate-700 transition-none" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Inventory</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 px-6 py-4 flex items-center gap-3 hover:bg-slate-300 dark:hover:bg-slate-700 transition-none" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Reports</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 px-6 py-4 flex items-center gap-3 hover:bg-slate-300 dark:hover:bg-slate-700 transition-none" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Customers</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 px-6 py-4 flex items-center gap-3 hover:bg-slate-300 dark:hover:bg-slate-700 transition-none" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Settings</span>
+</a>
+</nav>
+<div class="p-6 border-t border-slate-300 dark:border-slate-700">
+<button class="w-full bg-primary text-on-primary py-4 rounded-none text-xs font-medium uppercase tracking-widest font-inter hover:bg-primary-dim transition-none">
+                    New Transaction
+                </button>
+<div class="mt-6 flex items-center gap-3">
+<div class="w-8 h-8 bg-surface-container-highest rounded-none">
+<img class="w-full h-full object-cover" data-alt="portrait of a store manager in a professional environment with minimalist background and sharp lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAonmlu_5_g-19oesLpBw7e-uG6wU3wxFLSmA9CocxwfrTCP8RZQ2qj8eJXRteudIHmBh188vLcEDhMPHblbbBdGhO8gX6v45kaTdCsf5M7RrODdM9YW6RNpHJPx5g9r8grGhJM2HIZT-pCAXRKp-GMH35dfzMT68bN0cS5LqhDQZaJRE6F-sPMwFdoZQXKAcb7Xh6AgIh2BV8iEIqeUv4FjjuX-FmiQ38OyGaM8Arl_jfgc3OQeG-IvFBij5GTnj7z0hfla7mjiA"/>
+</div>
+<div>
+<div class="text-xs font-bold text-on-surface">Store Manager</div>
+<div class="text-[10px] text-on-surface-variant uppercase">Shift Active</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 flex-grow bg-surface overflow-y-auto p-8">
+<!-- Header Section -->
+<header class="mb-10 flex justify-between items-end">
+<div>
+<h1 class="text-4xl font-extrabold tracking-tighter text-on-surface">OPERATIONAL OVERVIEW</h1>
+<p class="text-label-md font-medium text-on-surface-variant tracking-widest uppercase mt-1">Live Feed • Terminal 01</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="bg-surface-container-low px-4 py-2 border-b-2 border-outline">
+<span class="text-[10px] font-bold uppercase text-on-surface-variant block">System Status</span>
+<span class="text-xs font-bold text-on-surface">ONLINE • 204.1.22</span>
+</div>
+</div>
+</header>
+<!-- Dashboard Grid -->
+<div class="grid grid-cols-12 gap-8">
+<!-- Recent Transactions (Large Column) -->
+<section class="col-span-12 lg:col-span-8">
+<div class="bg-surface-container-low border-b-4 border-primary p-1 mb-4 flex justify-between items-center">
+<h2 class="text-xl font-bold font-manrope tracking-tight px-3 py-2 text-on-surface">RECENT TRANSACTIONS</h2>
+<span class="material-symbols-outlined text-on-surface-variant px-3">history</span>
+</div>
+<div class="bg-surface-container-highest overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-dim">
+<tr>
+<th class="px-4 py-3 text-[10px] font-black uppercase tracking-widest text-on-surface-variant">ID</th>
+<th class="px-4 py-3 text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Timestamp</th>
+<th class="px-4 py-3 text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Customer</th>
+<th class="px-4 py-3 text-[10px] font-black uppercase tracking-widest text-on-surface-variant text-right">Amount</th>
+<th class="px-4 py-3 text-[10px] font-black uppercase tracking-widest text-on-surface-variant text-center">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-variant">
+<tr class="bg-surface-container-lowest hover:bg-surface-bright transition-none group">
+<td class="px-4 py-4 text-xs font-bold text-on-surface">#TRX-8902</td>
+<td class="px-4 py-4 text-xs text-on-surface-variant">14:22:10</td>
+<td class="px-4 py-4 text-xs font-medium text-on-surface">ALEXANDER VAUGHN</td>
+<td class="px-4 py-4 text-xs font-black text-on-surface text-right">$450.22</td>
+<td class="px-4 py-4 text-center">
+<span class="inline-block px-2 py-1 bg-surface-container-high text-[9px] font-black uppercase tracking-tighter">Completed</span>
+</td>
+</tr>
+<tr class="bg-surface-container-low hover:bg-surface-bright transition-none group">
+<td class="px-4 py-4 text-xs font-bold text-on-surface">#TRX-8901</td>
+<td class="px-4 py-4 text-xs text-on-surface-variant">14:15:45</td>
+<td class="px-4 py-4 text-xs font-medium text-on-surface">MARIA GONZALEZ</td>
+<td class="px-4 py-4 text-xs font-black text-on-surface text-right">$1,220.00</td>
+<td class="px-4 py-4 text-center">
+<span class="inline-block px-2 py-1 bg-surface-container-high text-[9px] font-black uppercase tracking-tighter">Completed</span>
+</td>
+</tr>
+<tr class="bg-surface-container-lowest hover:bg-surface-bright transition-none group">
+<td class="px-4 py-4 text-xs font-bold text-on-surface">#TRX-8899</td>
+<td class="px-4 py-4 text-xs text-on-surface-variant">13:58:30</td>
+<td class="px-4 py-4 text-xs font-medium text-on-surface">GUEST-091</td>
+<td class="px-4 py-4 text-xs font-black text-on-surface text-right">$89.15</td>
+<td class="px-4 py-4 text-center">
+<span class="inline-block px-2 py-1 bg-surface-container-high text-[9px] font-black uppercase tracking-tighter text-on-error">Refunded</span>
+</td>
+</tr>
+<tr class="bg-surface-container-low hover:bg-surface-bright transition-none group">
+<td class="px-4 py-4 text-xs font-bold text-on-surface">#TRX-8898</td>
+<td class="px-4 py-4 text-xs text-on-surface-variant">13:45:12</td>
+<td class="px-4 py-4 text-xs font-medium text-on-surface">SAMANTHA REED</td>
+<td class="px-4 py-4 text-xs font-black text-on-surface text-right">$312.50</td>
+<td class="px-4 py-4 text-center">
+<span class="inline-block px-2 py-1 bg-surface-container-high text-[9px] font-black uppercase tracking-tighter">Completed</span>
+</td>
+</tr>
+<tr class="bg-surface-container-lowest hover:bg-surface-bright transition-none group">
+<td class="px-4 py-4 text-xs font-bold text-on-surface">#TRX-8897</td>
+<td class="px-4 py-4 text-xs text-on-surface-variant">13:30:00</td>
+<td class="px-4 py-4 text-xs font-medium text-on-surface">GUEST-042</td>
+<td class="px-4 py-4 text-xs font-black text-on-surface text-right">$12.99</td>
+<td class="px-4 py-4 text-center">
+<span class="inline-block px-2 py-1 bg-surface-container-high text-[9px] font-black uppercase tracking-tighter">Completed</span>
+</td>
+</tr>
+<tr class="bg-surface-container-low hover:bg-surface-bright transition-none group">
+<td class="px-4 py-4 text-xs font-bold text-on-surface">#TRX-8896</td>
+<td class="px-4 py-4 text-xs text-on-surface-variant">13:12:44</td>
+<td class="px-4 py-4 text-xs font-medium text-on-surface">ETHAN HUNT</td>
+<td class="px-4 py-4 text-xs font-black text-on-surface text-right">$2,445.00</td>
+<td class="px-4 py-4 text-center">
+<span class="inline-block px-2 py-1 bg-surface-container-high text-[9px] font-black uppercase tracking-tighter">Completed</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Top Selling Items (Sidebar Column) -->
+<section class="col-span-12 lg:col-span-4">
+<div class="bg-surface-container-low border-b-4 border-secondary p-1 mb-4 flex justify-between items-center">
+<h2 class="text-xl font-bold font-manrope tracking-tight px-3 py-2 text-on-surface">TOP SELLING ITEMS</h2>
+<span class="material-symbols-outlined text-on-surface-variant px-3">trending_up</span>
+</div>
+<div class="space-y-4">
+<!-- Item 1 -->
+<div class="bg-surface-container-lowest border-l-8 border-primary-dim p-4 flex gap-4 items-center">
+<div class="w-16 h-16 bg-surface-container-high shrink-0">
+<img class="w-full h-full object-cover" data-alt="minimalist overhead shot of a modern wristwatch on a gray concrete surface with industrial styling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJ-VP6J3SzknINArBTPz8qnm_k2a6I3H7JiWVvw4tMCHMKvNTZFtqPwDJuuQEakRK3Zl3WR9bIeJfbnzX0RMRL4X8mNHUtWwqVXMa32EFXSGeUUmJRyWYamt2GMsOZEkXzwO9vOUtDxLoKikhNs3qep_yDI0gkbg19yThdwx3qZWvhfF-6uRc4h5fE_yJWQGigZC5o0VmY1qrJTbC3mIAxKzFiPWrVHHEMkk5gfCVE35Tt_fPYWlR49eI-BZNY1vBTTtXUT23eF9Y"/>
+</div>
+<div class="flex-grow">
+<h3 class="text-sm font-black uppercase text-on-surface tracking-tight leading-none">Titanium Chronograph</h3>
+<p class="text-[10px] text-on-surface-variant font-medium mt-1">SKU: WA-1029</p>
+<div class="mt-2 flex justify-between items-end">
+<span class="text-lg font-black text-on-surface">$299.00</span>
+<span class="text-[10px] font-bold text-secondary uppercase bg-secondary-container px-2 py-0.5">142 Sold</span>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-container-lowest border-l-8 border-secondary p-4 flex gap-4 items-center">
+<div class="w-16 h-16 bg-surface-container-high shrink-0">
+<img class="w-full h-full object-cover" data-alt="professional studio shot of matte black over-ear headphones in dramatic low light highlighting geometric angles" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBcQRhiF_d1Xc6Ga3Jlkdpji3JN8WhIK-kecHkYHk6Yl7t_ygGdADjOI1lmEhAZnH4Ik2NSnTHmpIlxI9NRjovNreSboVw54yQNMLgDXXm0GkE1TbEKb6hZ5beA0SIQBct3KVdoe74QYNq7tDVG99GhGxeaC8FKXp47KTMWCNol_65EZW6sR5-JcdrTC51STbHDbz3KHtqB_HVgcPUogn8mxEmsIBVkWdU9Ft5pAtbQpx3wLoRiZiTOJ7Y0CMBjFTVJUzUYkopOOQ"/>
+</div>
+<div class="flex-grow">
+<h3 class="text-sm font-black uppercase text-on-surface tracking-tight leading-none">Studio Headphones X1</h3>
+<p class="text-[10px] text-on-surface-variant font-medium mt-1">SKU: AU-8822</p>
+<div class="mt-2 flex justify-between items-end">
+<span class="text-lg font-black text-on-surface">$189.99</span>
+<span class="text-[10px] font-bold text-secondary uppercase bg-secondary-container px-2 py-0.5">98 Sold</span>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="bg-surface-container-lowest border-l-8 border-tertiary-dim p-4 flex gap-4 items-center">
+<div class="w-16 h-16 bg-surface-container-high shrink-0">
+<img class="w-full h-full object-cover" data-alt="macro close-up of a premium fountain pen on textured paper with shallow depth of field" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBwWxqpXKiysHjzQPkhT-tKLF3XbdEEtGqJgNYMIhOPzrouOp9dumAtQBbz_tCheZD9PJ3DUqRG-k_OmDQ2-U1JA6FxaeAU8lfCbmtK7xSF1toyXWfCUefgRB73A3alFeUsB6T5e99bDuK8DqFw2HLtjU9ZzGcBgSxJg3mFKls8UaJjrnElE_ms_e3uJAdE62DctVrvCVkd48wWXl-SrDNe4ZQdEgxx9j1JoOWCt1Hl9gllO_dAtkFBiuNtnG3qXk3Lx0oPqzwRSo"/>
+</div>
+<div class="flex-grow">
+<h3 class="text-sm font-black uppercase text-on-surface tracking-tight leading-none">Arch Pen - Carbon Fiber</h3>
+<p class="text-[10px] text-on-surface-variant font-medium mt-1">SKU: ST-3301</p>
+<div class="mt-2 flex justify-between items-end">
+<span class="text-lg font-black text-on-surface">$45.50</span>
+<span class="text-[10px] font-bold text-secondary uppercase bg-secondary-container px-2 py-0.5">85 Sold</span>
+</div>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="bg-surface-container-lowest border-l-8 border-outline-variant p-4 flex gap-4 items-center">
+<div class="w-16 h-16 bg-surface-container-high shrink-0">
+<img class="w-full h-full object-cover" data-alt="architectural leather handbag in slate grey presented on a matching monolithic pedestal" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDmjMOK-meGEZ-zebZwJkV94JXapsofL0_smAgBYrJEFfJz48-8DP0aSxOq8lk_DFSyWBywpx0hxb7ODVoYKWLpKhoLNCw4xWgm99fwd6_7yPaQmoK0KE_mbX06yqGtQiS89NO0Bmgbw76eJADdQ7ILUgKJJm6cyVpkLRK46S8SMgDltjEwwhGpLcbxSmdNm5k_BcwIaWuyegbiyjTVczqzfTN48Rl5IHEtSTi3ELnLnInYeOGzWg0sau3hEzUlzCyqvrkeZ2xITE"/>
+</div>
+<div class="flex-grow">
+<h3 class="text-sm font-black uppercase text-on-surface tracking-tight leading-none">Slate Carry-All L3</h3>
+<p class="text-[10px] text-on-surface-variant font-medium mt-1">SKU: BG-4409</p>
+<div class="mt-2 flex justify-between items-end">
+<span class="text-lg font-black text-on-surface">$720.00</span>
+<span class="text-[10px] font-bold text-secondary uppercase bg-secondary-container px-2 py-0.5">42 Sold</span>
+</div>
+</div>
+</div>
+<button class="w-full py-3 bg-surface-container-high border-t-2 border-outline-variant text-[10px] font-black uppercase tracking-widest text-on-surface-variant hover:bg-surface-dim transition-none">
+                            View Full Inventory Report
+                        </button>
+</div>
+</section>
+</div>
+<!-- Recessed Footer for Context -->
+<footer class="mt-12 p-6 bg-surface-container border-t border-surface-variant flex justify-between items-center">
+<div class="flex gap-8">
+<div>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase block">Uptime</span>
+<span class="text-xs font-bold text-on-surface">99.98%</span>
+</div>
+<div>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase block">Sync Status</span>
+<span class="text-xs font-bold text-on-surface">CURRENT</span>
+</div>
+</div>
+<div class="text-[10px] font-medium text-on-surface-variant uppercase tracking-widest">
+                    © 2024 MONOLITH DATA ARCHITECTURE • v4.2.0
+                </div>
+</footer>
+</main>
+</div>
+</body></html>

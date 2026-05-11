@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Monolith POS - Settings Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-dim": "#43546a",
+                        "on-background": "#2a3439",
+                        "on-error-container": "#752121",
+                        "on-error": "#fff7f6",
+                        "inverse-primary": "#ffffff",
+                        "surface-bright": "#f7f9fb",
+                        "secondary": "#526074",
+                        "on-tertiary-fixed-variant": "#45566b",
+                        "on-primary-container": "#525151",
+                        "on-secondary-container": "#455367",
+                        "on-tertiary": "#f7f9ff",
+                        "outline": "#717c82",
+                        "on-primary": "#faf7f6",
+                        "surface-container-low": "#f0f4f7",
+                        "surface-variant": "#d9e4ea",
+                        "primary-container": "#e5e2e1",
+                        "secondary-dim": "#465468",
+                        "inverse-surface": "#0b0f10",
+                        "error-dim": "#4e0309",
+                        "outline-variant": "#a9b4b9",
+                        "secondary-container": "#d5e3fc",
+                        "secondary-fixed-dim": "#c7d5ed",
+                        "surface-container-high": "#e1e9ee",
+                        "on-surface-variant": "#566166",
+                        "on-surface": "#f8f8ff",
+                        "surface-container-highest": "#d9e4ea",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#5c5b5b",
+                        "on-surface": "#2a3439",
+                        "primary": "#5f5e5e",
+                        "surface-container": "#e8eff3",
+                        "inverse-on-surface": "#9a9d9f",
+                        "tertiary-fixed-dim": "#b9cbe4",
+                        "tertiary-container": "#c7d9f3",
+                        "secondary-fixed": "#d5e3fc",
+                        "on-tertiary-fixed": "#28394e",
+                        "on-tertiary-container": "#3b4c61",
+                        "on-secondary-fixed": "#324053",
+                        "primary-dim": "#535252",
+                        "tertiary-fixed": "#c7d9f3",
+                        "tertiary": "#4f6076",
+                        "background": "#f7f9fb",
+                        "on-secondary-fixed-variant": "#4e5c71",
+                        "surface-dim": "#cfdce3",
+                        "primary-fixed-dim": "#d6d4d3",
+                        "error-container": "#fe8983",
+                        "surface-tint": "#5f5e5e",
+                        "error": "#9f403d",
+                        "on-primary-fixed": "#403f3f",
+                        "primary-fixed": "#e5e2e1",
+                        "surface": "#f7f9fb"
+                    },
+                    "borderRadius": {
+                        "none": "0px",
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "0px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #a9b4b9;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface flex h-screen overflow-hidden">
+<aside class="flex flex-col h-screen bg-slate-200 dark:bg-slate-800 h-full w-64 fixed left-0 top-0 rounded-none border-r-0">
+<div class="p-6">
+<h1 class="text-lg font-black text-slate-900 dark:text-white tracking-tighter uppercase mb-1">MONOLITH POS</h1>
+<p class="text-xs font-medium uppercase tracking-widest font-inter text-slate-600 dark:text-slate-400">Terminal 01</p>
+</div>
+<nav class="flex-1">
+<a class="text-slate-600 dark:text-slate-400 px-6 py-4 flex items-center gap-3 hover:bg-slate-300 dark:hover:bg-slate-700 transition-none" href="#">
+<span class="material-symbols-outlined">point_of_sale</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Terminal</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 px-6 py-4 flex items-center gap-3 hover:bg-slate-300 dark:hover:bg-slate-700 transition-none" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Transactions</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 px-6 py-4 flex items-center gap-3 hover:bg-slate-300 dark:hover:bg-slate-700 transition-none" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Inventory</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 px-6 py-4 flex items-center gap-3 hover:bg-slate-300 dark:hover:bg-slate-700 transition-none" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Reports</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 px-6 py-4 flex items-center gap-3 hover:bg-slate-300 dark:hover:bg-slate-700 transition-none" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Customers</span>
+</a>
+<a class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white border-l-4 border-slate-600 dark:border-slate-400 font-bold px-6 py-4 flex items-center gap-3 transition-none" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Settings</span>
+</a>
+</nav>
+<div class="mt-auto p-6 bg-slate-300/30 dark:bg-slate-700/30">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 bg-slate-400 flex items-center justify-center rounded-none overflow-hidden">
+<img alt="Store Manager" data-alt="professional portrait of a store manager in business attire with neutral background high contrast editorial lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiMxkYTgVZ8aXIeX0EJWNoxjZ6HIefOeTZulsWl7fRcANaDD1CirdEavglbYsS_j7a8Ccgs0zCC6kNHbfXgb1o-2TvbtO663RgumI39NbkcDcs0aLVodTUFkHxFPpSGxxoh8dXQYK1NYnes3zDHUiO4_urLkECcl82JeZg51KKrqXfMIa_ydffJxi55vZMIWEcgRU5ykLjIBZpCzryxnG-D-7mVNj8ruAM30UUFPjhPqPgHB6BBFNpCaxsVybaTfovx-xPbTUSNhk"/>
+</div>
+<div>
+<p class="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-tight">Manager</p>
+<p class="text-[10px] text-slate-500 uppercase tracking-widest">Store Admin</p>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary py-2 text-xs font-bold uppercase tracking-tighter hover:bg-primary-dim transition-none rounded-none">
+                New Transaction
+            </button>
+</div>
+</aside>
+<main class="flex-1 ml-64 overflow-y-auto bg-surface h-screen">
+<header class="sticky top-0 z-10 bg-surface/80 backdrop-blur-xl px-12 py-8 flex items-baseline justify-between">
+<div>
+<h2 class="text-4xl font-extrabold font-headline tracking-tighter text-on-surface uppercase">Settings Hub</h2>
+<p class="text-label-md text-on-surface-variant font-medium tracking-[0.05em] uppercase mt-1">Global Configuration / Terminal Control</p>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-2 bg-secondary text-on-secondary text-xs font-bold uppercase tracking-widest hover:bg-secondary-dim transition-none">Discard Changes</button>
+<button class="px-6 py-2 bg-primary text-on-primary text-xs font-bold uppercase tracking-widest hover:bg-primary-dim transition-none">Commit Config</button>
+</div>
+</header>
+<section class="px-12 pb-12 grid grid-cols-12 gap-1 gap-y-1">
+<div class="col-span-12 md:col-span-8 space-y-1">
+<div class="bg-surface-container-low p-8">
+<h3 class="text-xl font-bold font-headline tracking-tight uppercase mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">store</span>
+                        Store Identity
+                    </h3>
+<div class="grid grid-cols-2 gap-8">
+<div class="space-y-4">
+<label class="block text-[10px] font-bold uppercase tracking-[0.15em] text-on-surface-variant">Store Name</label>
+<input class="w-full bg-surface-container-low border-0 border-b-2 border-outline focus:border-secondary focus:ring-0 text-label-md text-on-surface font-medium px-0 py-2" type="text" value="MONOLITH_HQ_NYC"/>
+</div>
+<div class="space-y-4">
+<label class="block text-[10px] font-bold uppercase tracking-[0.15em] text-on-surface-variant">Store ID</label>
+<input class="w-full bg-surface-container-low border-0 border-b-2 border-outline focus:border-secondary focus:ring-0 text-label-md text-on-surface font-medium px-0 py-2" readonly="" type="text" value="XP-9000-A"/>
+</div>
+<div class="col-span-2 space-y-4">
+<label class="block text-[10px] font-bold uppercase tracking-[0.15em] text-on-surface-variant">Physical Address</label>
+<input class="w-full bg-surface-container-low border-0 border-b-2 border-outline focus:border-secondary focus:ring-0 text-label-md text-on-surface font-medium px-0 py-2" type="text" value="700 LIBERTY ST, NEW YORK, NY 10006"/>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low p-8">
+<h3 class="text-xl font-bold font-headline tracking-tight uppercase mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">percent</span>
+                        Tax Configuration Matrix
+                    </h3>
+<div class="overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high">
+<th class="p-4 text-[10px] font-black uppercase tracking-[0.1em] text-on-surface">Tax Authority</th>
+<th class="p-4 text-[10px] font-black uppercase tracking-[0.1em] text-on-surface">Rate</th>
+<th class="p-4 text-[10px] font-black uppercase tracking-[0.1em] text-on-surface">Classification</th>
+<th class="p-4 text-[10px] font-black uppercase tracking-[0.1em] text-on-surface text-right">Status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="bg-surface hover:bg-surface-container-highest transition-none">
+<td class="p-4 text-xs font-medium text-on-surface">NY STATE SALES</td>
+<td class="p-4 text-xs font-mono text-on-surface">4.000%</td>
+<td class="p-4 text-[10px] uppercase font-bold text-on-surface-variant">Standard Rate</td>
+<td class="p-4 text-right"><span class="bg-secondary px-2 py-0.5 text-[8px] font-bold text-on-secondary uppercase">Active</span></td>
+</tr>
+<tr class="bg-surface-container-low hover:bg-surface-container-highest transition-none">
+<td class="p-4 text-xs font-medium text-on-surface">NYC LOCAL TAX</td>
+<td class="p-4 text-xs font-mono text-on-surface">4.500%</td>
+<td class="p-4 text-[10px] uppercase font-bold text-on-surface-variant">Local Surcharge</td>
+<td class="p-4 text-right"><span class="bg-secondary px-2 py-0.5 text-[8px] font-bold text-on-secondary uppercase">Active</span></td>
+</tr>
+<tr class="bg-surface hover:bg-surface-container-highest transition-none">
+<td class="p-4 text-xs font-medium text-on-surface">MCTD SURCHARGE</td>
+<td class="p-4 text-xs font-mono text-on-surface">0.375%</td>
+<td class="p-4 text-[10px] uppercase font-bold text-on-surface-variant">Transit Authority</td>
+<td class="p-4 text-right"><span class="bg-secondary px-2 py-0.5 text-[8px] font-bold text-on-secondary uppercase">Active</span></td>
+</tr>
+<tr class="bg-surface-container-low hover:bg-surface-container-highest transition-none">
+<td class="p-4 text-xs font-medium text-on-surface">EXEMPT_FOOD_V1</td>
+<td class="p-4 text-xs font-mono text-on-surface">0.000%</td>
+<td class="p-4 text-[10px] uppercase font-bold text-on-surface-variant">Exemption Class</td>
+<td class="p-4 text-right"><span class="bg-outline px-2 py-0.5 text-[8px] font-bold text-on-surface uppercase">Inactive</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<button class="mt-4 w-full border-2 border-dashed border-outline-variant py-3 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant hover:bg-surface-variant transition-none">
+                        + Append New Tax Rule
+                    </button>
+</div>
+</div>
+<div class="col-span-12 md:col-span-4 space-y-1">
+<div class="bg-slate-900 p-8 text-white h-full flex flex-col justify-between">
+<div>
+<h3 class="text-xl font-bold font-headline tracking-tight uppercase mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined">security</span>
+                            Security Protocol
+                        </h3>
+<div class="space-y-6">
+<div class="flex items-center justify-between group">
+<div>
+<p class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Two-Factor Auth</p>
+<p class="text-xs text-slate-500">Require MFA for Manager override</p>
+</div>
+<div class="w-10 h-5 bg-slate-700 relative">
+<div class="absolute top-0 left-0 w-5 h-5 bg-slate-400"></div>
+</div>
+</div>
+<div class="flex items-center justify-between group">
+<div>
+<p class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Auto-Lock Terminal</p>
+<p class="text-xs text-slate-500">Lock after 5 mins of inactivity</p>
+</div>
+<div class="w-10 h-5 bg-primary relative">
+<div class="absolute top-0 right-0 w-5 h-5 bg-white"></div>
+</div>
+</div>
+<div class="flex items-center justify-between group">
+<div>
+<p class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Hardware Encrypt</p>
+<p class="text-xs text-slate-500">AES-256 local storage encryption</p>
+</div>
+<div class="w-10 h-5 bg-primary relative">
+<div class="absolute top-0 right-0 w-5 h-5 bg-white"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-12 pt-12 border-t border-slate-800">
+<div class="bg-slate-800 p-4 space-y-2">
+<p class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Firmware Status</p>
+<div class="flex justify-between items-baseline">
+<span class="text-2xl font-black font-headline tracking-tighter">v4.8.2-STABLE</span>
+<span class="text-[10px] font-bold text-emerald-400">VERIFIED</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-high p-8 flex items-center justify-center">
+<div class="text-center">
+<span class="material-symbols-outlined text-6xl text-outline-variant mb-4">qr_code_2</span>
+<p class="text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant">Mobile Terminal Link</p>
+</div>
+</div>
+</div>
+<div class="col-span-12 grid grid-cols-4 gap-1 mt-1">
+<div class="bg-surface-container-low p-6 flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">print</span>
+</div>
+<div>
+<p class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Peripherals</p>
+<p class="text-xs font-bold text-on-surface uppercase">3 Printers Connected</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">lan</span>
+</div>
+<div>
+<p class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Network</p>
+<p class="text-xs font-bold text-on-surface uppercase">Static IP: 192.168.1.104</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">sync</span>
+</div>
+<div>
+<p class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Cloud Sync</p>
+<p class="text-xs font-bold text-on-surface uppercase">Last Sync: 2m ago</p>
+</div>
+</div>
+<div class="bg-error-container/20 p-6 flex items-center gap-4 border-l-4 border-error">
+<div class="w-12 h-12 bg-error-container/40 flex items-center justify-center">
+<span class="material-symbols-outlined text-error" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<div>
+<p class="text-[10px] font-black uppercase tracking-widest text-error">System Alert</p>
+<p class="text-xs font-bold text-on-error-container uppercase">Backup Battery Low</p>
+</div>
+</div>
+</div>
+</section>
+<section class="px-12 pb-24">
+<div class="bg-surface-container-low p-8">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h3 class="text-xl font-bold font-headline tracking-tight uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">currency_exchange</span>
+                            Currency &amp; Localization
+                        </h3>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">ISO 4217 Standard Compliance</span>
+</div>
+<div class="grid grid-cols-3 gap-12">
+<div class="space-y-4">
+<label class="block text-[10px] font-bold uppercase tracking-[0.15em] text-on-surface-variant">Primary Currency</label>
+<select class="w-full bg-surface-container-low border-0 border-b-2 border-outline focus:border-secondary focus:ring-0 text-label-md text-on-surface font-medium px-0 py-2">
+<option>USD - United States Dollar</option>
+<option>EUR - Euro</option>
+<option>GBP - British Pound</option>
+</select>
+</div>
+<div class="space-y-4">
+<label class="block text-[10px] font-bold uppercase tracking-[0.15em] text-on-surface-variant">Display Format</label>
+<select class="w-full bg-surface-container-low border-0 border-b-2 border-outline focus:border-secondary focus:ring-0 text-label-md text-on-surface font-medium px-0 py-2">
+<option>$1,234.56</option>
+<option>1.234,56 $</option>
+</select>
+</div>
+<div class="space-y-4">
+<label class="block text-[10px] font-bold uppercase tracking-[0.15em] text-on-surface-variant">Timezone</label>
+<select class="w-full bg-surface-container-low border-0 border-b-2 border-outline focus:border-secondary focus:ring-0 text-label-md text-on-surface font-medium px-0 py-2">
+<option>(GMT-05:00) Eastern Time</option>
+<option>(GMT-08:00) Pacific Time</option>
+</select>
+</div>
+</div>
+</div>
+</section>
+</main>
+</body></html>

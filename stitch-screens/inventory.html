@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Inventory Management | MONOLITH POS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-dim": "#43546a",
+                        "on-background": "#2a3439",
+                        "on-error-container": "#752121",
+                        "on-error": "#fff7f6",
+                        "inverse-primary": "#ffffff",
+                        "surface-bright": "#f7f9fb",
+                        "secondary": "#526074",
+                        "on-tertiary-fixed-variant": "#45566b",
+                        "on-primary-container": "#525151",
+                        "on-secondary-container": "#455367",
+                        "on-tertiary": "#f7f9ff",
+                        "outline": "#717c82",
+                        "on-primary": "#faf7f6",
+                        "surface-container-low": "#f0f4f7",
+                        "surface-variant": "#d9e4ea",
+                        "primary-container": "#e5e2e1",
+                        "secondary-dim": "#465468",
+                        "inverse-surface": "#0b0f10",
+                        "error-dim": "#4e0309",
+                        "outline-variant": "#a9b4b9",
+                        "secondary-container": "#d5e3fc",
+                        "secondary-fixed-dim": "#c7d5ed",
+                        "surface-container-high": "#e1e9ee",
+                        "on-surface-variant": "#566166",
+                        "on-secondary": "#f8f8ff",
+                        "surface-container-highest": "#d9e4ea",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#5c5b5b",
+                        "on-surface": "#2a3439",
+                        "primary": "#5f5e5e",
+                        "surface-container": "#e8eff3",
+                        "inverse-on-surface": "#9a9d9f",
+                        "tertiary-fixed-dim": "#b9cbe4",
+                        "tertiary-container": "#c7d9f3",
+                        "secondary-fixed": "#d5e3fc",
+                        "on-tertiary-fixed": "#28394e",
+                        "on-tertiary-container": "#3b4c61",
+                        "on-secondary-fixed": "#324053",
+                        "primary-dim": "#535252",
+                        "tertiary-fixed": "#c7d9f3",
+                        "tertiary": "#4f6076",
+                        "background": "#f7f9fb",
+                        "on-secondary-fixed-variant": "#4e5c71",
+                        "surface-dim": "#cfdce3",
+                        "primary-fixed-dim": "#d6d4d3",
+                        "error-container": "#fe8983",
+                        "surface-tint": "#5f5e5e",
+                        "error": "#9f403d",
+                        "on-primary-fixed": "#403f3f",
+                        "primary-fixed": "#e5e2e1",
+                        "surface": "#f7f9fb"
+                    },
+                    "borderRadius": {
+                        "none": "0px",
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f0f4f7; }
+        ::-webkit-scrollbar-thumb { background: #717c82; border-radius: 0px; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface h-screen overflow-hidden flex">
+<!-- SideNavBar (Execution from JSON) -->
+<aside class="flex flex-col h-screen h-full w-64 fixed left-0 top-0 rounded-none border-r-0 bg-slate-200 dark:bg-slate-800 z-50">
+<div class="p-6">
+<div class="text-lg font-black text-slate-900 dark:text-white tracking-tighter uppercase mb-1">MONOLITH POS</div>
+<div class="text-xs font-medium uppercase tracking-widest font-inter text-slate-600 dark:text-slate-400">Terminal 01</div>
+</div>
+<nav class="flex-1 mt-4">
+<!-- Terminal -->
+<a class="text-slate-600 dark:text-slate-400 px-6 py-4 flex items-center gap-3 hover:bg-slate-300 dark:hover:bg-slate-700 transition-none" href="#">
+<span class="material-symbols-outlined" data-icon="point_of_sale">point_of_sale</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Terminal</span>
+</a>
+<!-- Transactions -->
+<a class="text-slate-600 dark:text-slate-400 px-6 py-4 flex items-center gap-3 hover:bg-slate-300 dark:hover:bg-slate-700 transition-none" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Transactions</span>
+</a>
+<!-- Inventory (ACTIVE) -->
+<a class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white border-l-4 border-slate-600 dark:border-slate-400 font-bold px-6 py-4 flex items-center gap-3 transition-none" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Inventory</span>
+</a>
+<!-- Reports -->
+<a class="text-slate-600 dark:text-slate-400 px-6 py-4 flex items-center gap-3 hover:bg-slate-300 dark:hover:bg-slate-700 transition-none" href="#">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Reports</span>
+</a>
+<!-- Customers -->
+<a class="text-slate-600 dark:text-slate-400 px-6 py-4 flex items-center gap-3 hover:bg-slate-300 dark:hover:bg-slate-700 transition-none" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Customers</span>
+</a>
+<!-- Settings -->
+<a class="text-slate-600 dark:text-slate-400 px-6 py-4 flex items-center gap-3 hover:bg-slate-300 dark:hover:bg-slate-700 transition-none" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Settings</span>
+</a>
+</nav>
+<div class="p-6">
+<button class="w-full bg-primary text-on-primary font-bold py-3 uppercase tracking-tighter text-sm hover:bg-primary-dim transition-none">
+                New Transaction
+            </button>
+<div class="mt-6 flex items-center gap-3">
+<div class="w-8 h-8 bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">person</span>
+</div>
+<div class="text-[10px] font-bold uppercase tracking-widest text-slate-900 dark:text-white">Store Manager</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="ml-64 flex-1 flex flex-col h-screen bg-surface">
+<!-- Inventory Header & Controls -->
+<header class="p-8 pb-4 flex flex-col gap-6">
+<div class="flex justify-between items-end">
+<div>
+<h1 class="text-3xl font-extrabold tracking-tighter uppercase text-primary">Inventory Management</h1>
+<p class="text-[10px] font-medium text-outline uppercase tracking-widest mt-1">Real-time stock synchronization active</p>
+</div>
+<div class="flex gap-2">
+<button class="bg-surface-container-high px-4 py-2 flex items-center gap-2 hover:bg-surface-dim transition-none">
+<span class="material-symbols-outlined text-sm" data-icon="upload">upload</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Export CSV</span>
+</button>
+<button class="bg-primary text-on-primary px-4 py-2 flex items-center gap-2 hover:bg-primary-dim transition-none">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Add New Product</span>
+</button>
+</div>
+</div>
+<!-- Filters Bar -->
+<div class="bg-surface-container-low p-4 flex items-center gap-4 border-b-2 border-outline-variant/15">
+<div class="flex-1 relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg">search</span>
+<input class="w-full bg-surface-container-highest border-none focus:ring-0 text-[11px] font-bold tracking-widest uppercase py-3 pl-10" placeholder="SEARCH BY SKU, NAME, OR BRAND..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<select class="bg-surface-container-highest border-none focus:ring-0 text-[11px] font-bold tracking-widest uppercase py-3 px-4 min-w-[160px]">
+<option>ALL CATEGORIES</option>
+<option>ELECTRONICS</option>
+<option>APPARAL</option>
+<option>KITCHENWARE</option>
+</select>
+<select class="bg-surface-container-highest border-none focus:ring-0 text-[11px] font-bold tracking-widest uppercase py-3 px-4 min-w-[160px]">
+<option>STOCK STATUS: ALL</option>
+<option>IN STOCK</option>
+<option>LOW STOCK</option>
+<option>OUT OF STOCK</option>
+</select>
+<button class="bg-surface-container-highest p-3 flex items-center justify-center hover:bg-surface-dim">
+<span class="material-symbols-outlined text-lg">filter_list</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Data Grid -->
+<section class="flex-1 overflow-auto px-8 pb-8">
+<div class="w-full bg-surface-container-lowest border-none">
+<table class="w-full border-collapse">
+<thead class="sticky top-0 bg-surface-container-high z-10">
+<tr>
+<th class="px-4 py-3 text-left text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant border-b border-outline-variant/20">SKU ID</th>
+<th class="px-4 py-3 text-left text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant border-b border-outline-variant/20">Product Specification</th>
+<th class="px-4 py-3 text-left text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant border-b border-outline-variant/20">Category</th>
+<th class="px-4 py-3 text-right text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant border-b border-outline-variant/20">Unit Price</th>
+<th class="px-4 py-3 text-right text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant border-b border-outline-variant/20">Stock Level</th>
+<th class="px-4 py-3 text-center text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant border-b border-outline-variant/20">Status</th>
+<th class="px-4 py-3 text-right text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant border-b border-outline-variant/20">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-none">
+<td class="px-4 py-4 text-[11px] font-bold tracking-tighter text-outline">#MNLT-7882-X</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container-high overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="minimalist professional white analog watch on light grey background studio lighting high contrast" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6YehK5ODMoawnC9fwPtVSam5Dd-cGhORejZQDxDxgWRT36lkbGjGmNozNzacC_obQFXvVEVou0b6YESRjqXGIg0dAJhFLcm85ly0xaXOf24jnU8ojIXO8ZR_6ejOV5W1TcYA-4BJ5he3tcHJL2X-uLeuHvyAj_qyu5bzu8uitIiSUPjshu1AH0WpvkD8G4xfBYYwrHHK3d1r1NjjCXqxqlsCOBBE1LnKTPeEcUCX13NbDlDpD1BFIywjuFju7rNUaT6EIvh_-DRY"/>
+</div>
+<div>
+<div class="text-[12px] font-bold uppercase text-on-surface leading-tight">Precision Chronograph V1</div>
+<div class="text-[10px] text-outline uppercase tracking-wider">Titanium Steel / Silver</div>
+</div>
+</div>
+</td>
+<td class="px-4 py-4">
+<span class="text-[10px] font-medium bg-secondary-container text-on-secondary-container px-2 py-0.5 tracking-widest uppercase">Accessories</span>
+</td>
+<td class="px-4 py-4 text-right text-[12px] font-bold text-on-surface">$249.00</td>
+<td class="px-4 py-4 text-right">
+<div class="text-[12px] font-bold text-on-surface">1,420</div>
+<div class="text-[9px] text-outline uppercase font-medium">Last sync 2m ago</div>
+</td>
+<td class="px-4 py-4 text-center">
+<span class="text-[9px] font-black uppercase bg-surface-container-high text-on-surface px-2 py-1 tracking-widest">In Stock</span>
+</td>
+<td class="px-4 py-4 text-right">
+<button class="text-outline hover:text-primary"><span class="material-symbols-outlined text-lg">edit_square</span></button>
+<button class="text-outline hover:text-primary ml-2"><span class="material-symbols-outlined text-lg">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="bg-surface-container-low hover:bg-surface-container-high transition-none">
+<td class="px-4 py-4 text-[11px] font-bold tracking-tighter text-outline">#MNLT-1290-K</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container-high overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="modern matte black over-ear wireless headphones on concrete surface soft shadow minimalist architectural style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCR2ha1_1k2UKQMPYtEAjzkqtMORbLRH-VWWbirsCpCa9KKPhPKVza7QqY26BWYUkigdR3-4R7oMEbEflC2-MOu0Us0AnjRBBtLKoBo-dYqVKfh33Mg_s5VGn9GUIvalApmWM9CcSEkt7L4ctseXxfnR623jYnkDr_qQxPqzr3mBhvs3lZBj2fKWD8UY6_DjXtU84neVVrVl5ROF3ITlu8Dxa15poChZtSfMSo8Lu1WKH2ScNDq2Ow0oDNPEI4c6JMfeYfniLVfg5Y"/>
+</div>
+<div>
+<div class="text-[12px] font-bold uppercase text-on-surface leading-tight">Acoustic Over-Ear Studio</div>
+<div class="text-[10px] text-outline uppercase tracking-wider">Matte Black / Wireless</div>
+</div>
+</div>
+</td>
+<td class="px-4 py-4">
+<span class="text-[10px] font-medium bg-secondary-container text-on-secondary-container px-2 py-0.5 tracking-widest uppercase">Electronics</span>
+</td>
+<td class="px-4 py-4 text-right text-[12px] font-bold text-on-surface">$189.50</td>
+<td class="px-4 py-4 text-right">
+<div class="text-[12px] font-bold text-error">12</div>
+<div class="text-[9px] text-error uppercase font-bold tracking-tighter">Threshold: 20</div>
+</td>
+<td class="px-4 py-4 text-center">
+<span class="text-[9px] font-black uppercase bg-error-container text-on-error-container px-2 py-1 tracking-widest">Low Stock</span>
+</td>
+<td class="px-4 py-4 text-right">
+<button class="text-outline hover:text-primary"><span class="material-symbols-outlined text-lg">edit_square</span></button>
+<button class="text-outline hover:text-primary ml-2"><span class="material-symbols-outlined text-lg">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-none">
+<td class="px-4 py-4 text-[11px] font-bold tracking-tighter text-outline">#MNLT-4431-L</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container-high overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="high end glass water bottle with metal cap on dark stone surface moody lighting sharp reflections" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxXODoYUB4SKltR0CipxUXwMMsRgF4L3N2u3wsy77FzyFPjrToFwMAB3ME6UgS76VXk5X4ceBMGcjvActbiGcvmAPSmioG4Iezvd4CxdGBapfDIVFBKeXpmwrGevO63BGzxyeDlfnnRRuzrLNBa71DhN6BUDDmqQdtSTWi59FfNeYhiqKC5P8zBvhI0X9MYTM4PbwgZGYR1VghQOXZ2EBAYIPgPDYF0_ajG8maR_lAxzUr_HC9a730wmu_lwYN-hOcznZwDt4JftU"/>
+</div>
+<div>
+<div class="text-[12px] font-bold uppercase text-on-surface leading-tight">HydroCore Flask 1.5L</div>
+<div class="text-[10px] text-outline uppercase tracking-wider">Brushed Aluminum</div>
+</div>
+</div>
+</td>
+<td class="px-4 py-4">
+<span class="text-[10px] font-medium bg-secondary-container text-on-secondary-container px-2 py-0.5 tracking-widest uppercase">Lifestyle</span>
+</td>
+<td class="px-4 py-4 text-right text-[12px] font-bold text-on-surface">$45.00</td>
+<td class="px-4 py-4 text-right">
+<div class="text-[12px] font-bold text-on-surface">582</div>
+<div class="text-[9px] text-outline uppercase font-medium">Bulk shipment arrived</div>
+</td>
+<td class="px-4 py-4 text-center">
+<span class="text-[9px] font-black uppercase bg-surface-container-high text-on-surface px-2 py-1 tracking-widest">In Stock</span>
+</td>
+<td class="px-4 py-4 text-right">
+<button class="text-outline hover:text-primary"><span class="material-symbols-outlined text-lg">edit_square</span></button>
+<button class="text-outline hover:text-primary ml-2"><span class="material-symbols-outlined text-lg">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="bg-surface-container-low hover:bg-surface-container-high transition-none">
+<td class="px-4 py-4 text-[11px] font-bold tracking-tighter text-outline">#MNLT-0092-B</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container-high overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="white game controller on white surface minimalist high key lighting clean architectural lines" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCp40Z35A6whqzpA7Nll7t_5lvA5e7_MqtSyGYsZ-MUYnM9ijUaQrMrzxtrkGrmkWVsEKPi3LzQtEAs4W3nWcjhGCY9rJ3H3nkv95DQX1oCxfgMF9C6G_vUw7DifWEDJzXQs583mH-xVUqeVX57lD1Z-SlVcTALDTnnynuiotp9nIQKGX51GpjAlfc5czr0SXxfJBlWTWj27hYuH2l6V4-SQvswu4wYt4DTl5hcArFblcVcUF4BTtV0t-IUNSp8avNMXW5U21-ILOY"/>
+</div>
+<div>
+<div class="text-[12px] font-bold uppercase text-on-surface leading-tight">Nexus Control Pad Pro</div>
+<div class="text-[10px] text-outline uppercase tracking-wider">Arctic White</div>
+</div>
+</div>
+</td>
+<td class="px-4 py-4">
+<span class="text-[10px] font-medium bg-secondary-container text-on-secondary-container px-2 py-0.5 tracking-widest uppercase">Gaming</span>
+</td>
+<td class="px-4 py-4 text-right text-[12px] font-bold text-on-surface">$129.99</td>
+<td class="px-4 py-4 text-right">
+<div class="text-[12px] font-bold text-on-surface">0</div>
+<div class="text-[9px] text-error uppercase font-bold tracking-tighter">Next delivery: TBC</div>
+</td>
+<td class="px-4 py-4 text-center">
+<span class="text-[9px] font-black uppercase bg-on-surface text-surface px-2 py-1 tracking-widest">Sold Out</span>
+</td>
+<td class="px-4 py-4 text-right">
+<button class="text-outline hover:text-primary"><span class="material-symbols-outlined text-lg">edit_square</span></button>
+<button class="text-outline hover:text-primary ml-2"><span class="material-symbols-outlined text-lg">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container-low transition-none">
+<td class="px-4 py-4 text-[11px] font-bold tracking-tighter text-outline">#MNLT-8812-Y</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container-high overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="portrait of electronic devices keyboard and mouse on office desk top view architectural layout" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnNOxzF1TTwzCBqWUVbe8Yi6S7HRihQyIBur89VwmXFTYMJ91MrRJqvtLuoRttTqwhlIaj83wIS8pENHdqVfPoZs9T8eO1fDlQm8ptPi3NZCKtRmWyZsdKwpBWRllIwFn_o6ByNu-AbimPZvhrVJXpCVmnrkSrf2FZ2NQPxBwrotCcXrDP8zG7SBtKPtQzHNE8oA3ozWV3N8-8ngUYpwMHja9tYRB0Z-W6_GgkoI66s_g6JvRtI66OjlAizZSp6hbtjgcYVzuaUEY"/>
+</div>
+<div>
+<div class="text-[12px] font-bold uppercase text-on-surface leading-tight">Tactile Mechanical Board</div>
+<div class="text-[10px] text-outline uppercase tracking-wider">65% Layout / Blue Switches</div>
+</div>
+</div>
+</td>
+<td class="px-4 py-4">
+<span class="text-[10px] font-medium bg-secondary-container text-on-secondary-container px-2 py-0.5 tracking-widest uppercase">Electronics</span>
+</td>
+<td class="px-4 py-4 text-right text-[12px] font-bold text-on-surface">$115.00</td>
+<td class="px-4 py-4 text-right">
+<div class="text-[12px] font-bold text-on-surface">45</div>
+<div class="text-[9px] text-outline uppercase font-medium">Moving fast</div>
+</td>
+<td class="px-4 py-4 text-center">
+<span class="text-[9px] font-black uppercase bg-surface-container-high text-on-surface px-2 py-1 tracking-widest">In Stock</span>
+</td>
+<td class="px-4 py-4 text-right">
+<button class="text-outline hover:text-primary"><span class="material-symbols-outlined text-lg">edit_square</span></button>
+<button class="text-outline hover:text-primary ml-2"><span class="material-symbols-outlined text-lg">more_vert</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Pagination/Footer Stats -->
+<footer class="px-8 py-4 bg-surface-container flex justify-between items-center">
+<div class="flex items-center gap-6">
+<div class="flex flex-col">
+<span class="text-[9px] font-bold uppercase tracking-widest text-outline">Total SKU Count</span>
+<span class="text-sm font-extrabold text-on-surface">12,482 Items</span>
+</div>
+<div class="w-[1px] h-8 bg-outline-variant/30"></div>
+<div class="flex flex-col">
+<span class="text-[9px] font-bold uppercase tracking-widest text-outline">Inventory Value</span>
+<span class="text-sm font-extrabold text-on-surface">$428,590.22</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-[10px] font-bold uppercase tracking-widest text-outline">Page 1 of 125</span>
+<div class="flex gap-1">
+<button class="bg-surface-container-highest p-2 hover:bg-surface-dim"><span class="material-symbols-outlined text-sm">chevron_left</span></button>
+<button class="bg-primary text-on-primary p-2 hover:bg-primary-dim"><span class="text-[10px] font-bold px-2">1</span></button>
+<button class="bg-surface-container-highest p-2 hover:bg-surface-dim"><span class="text-[10px] font-bold px-2">2</span></button>
+<button class="bg-surface-container-highest p-2 hover:bg-surface-dim"><span class="text-[10px] font-bold px-2">3</span></button>
+<button class="bg-surface-container-highest p-2 hover:bg-surface-dim"><span class="material-symbols-outlined text-sm">chevron_right</span></button>
+</div>
+</div>
+</footer>
+</main>
+</body></html>

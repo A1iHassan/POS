@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Monolith POS - Store Insights</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-dim": "#43546a",
+                        "on-background": "#2a3439",
+                        "on-error-container": "#752121",
+                        "on-error": "#fff7f6",
+                        "inverse-primary": "#ffffff",
+                        "surface-bright": "#f7f9fb",
+                        "secondary": "#526074",
+                        "on-tertiary-fixed-variant": "#45566b",
+                        "on-primary-container": "#525151",
+                        "on-secondary-container": "#455367",
+                        "on-tertiary": "#f7f9ff",
+                        "outline": "#717c82",
+                        "on-primary": "#faf7f6",
+                        "surface-container-low": "#f0f4f7",
+                        "surface-variant": "#d9e4ea",
+                        "primary-container": "#e5e2e1",
+                        "secondary-dim": "#465468",
+                        "inverse-surface": "#0b0f10",
+                        "error-dim": "#4e0309",
+                        "outline-variant": "#a9b4b9",
+                        "secondary-container": "#d5e3fc",
+                        "secondary-fixed-dim": "#c7d5ed",
+                        "surface-container-high": "#e1e9ee",
+                        "on-surface-variant": "#566166",
+                        "on-secondary": "#f8f8ff",
+                        "surface-container-highest": "#d9e4ea",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#5c5b5b",
+                        "on-surface": "#2a3439",
+                        "primary": "#5f5e5e",
+                        "surface-container": "#e8eff3",
+                        "inverse-on-surface": "#9a9d9f",
+                        "tertiary-fixed-dim": "#b9cbe4",
+                        "tertiary-container": "#c7d9f3",
+                        "secondary-fixed": "#d5e3fc",
+                        "on-tertiary-fixed": "#28394e",
+                        "on-tertiary-container": "#3b4c61",
+                        "on-secondary-fixed": "#324053",
+                        "primary-dim": "#535252",
+                        "tertiary-fixed": "#c7d9f3",
+                        "tertiary": "#4f6076",
+                        "background": "#f7f9fb",
+                        "on-secondary-fixed-variant": "#4e5c71",
+                        "surface-dim": "#cfdce3",
+                        "primary-fixed-dim": "#d6d4d3",
+                        "error-container": "#fe8983",
+                        "surface-tint": "#5f5e5e",
+                        "error": "#9f403d",
+                        "on-primary-fixed": "#403f3f",
+                        "primary-fixed": "#e5e2e1",
+                        "surface": "#f7f9fb"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "0px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb;
+        }
+        .architectural-grid {
+            background-size: 40px 40px;
+            background-image: radial-gradient(circle, #d9e4ea 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body class="text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<div class="flex flex-col h-screen overflow-hidden">
+<div class="flex flex-1 overflow-hidden">
+<!-- SideNavBar Component mapping style_shell_layout -->
+<aside class="flex flex-col h-screen bg-slate-200 dark:bg-slate-800 h-full w-64 fixed left-0 top-0 rounded-none border-r-0 z-50">
+<div class="p-6 pb-8">
+<div class="text-lg font-black text-slate-900 dark:text-white tracking-tighter uppercase mb-1">MONOLITH POS</div>
+<div class="text-xs font-medium uppercase tracking-widest font-inter text-slate-600 dark:text-slate-400">Terminal 01</div>
+</div>
+<nav class="flex-1 space-y-0">
+<a class="text-slate-600 dark:text-slate-400 px-6 py-4 flex items-center gap-3 hover:bg-slate-300 dark:hover:bg-slate-700 transition-none" href="#">
+<span class="material-symbols-outlined" data-icon="point_of_sale">point_of_sale</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Terminal</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 px-6 py-4 flex items-center gap-3 hover:bg-slate-300 dark:hover:bg-slate-700 transition-none" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Transactions</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 px-6 py-4 flex items-center gap-3 hover:bg-slate-300 dark:hover:bg-slate-700 transition-none" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Inventory</span>
+</a>
+<a class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white border-l-4 border-slate-600 dark:border-slate-400 font-bold px-6 py-4 flex items-center gap-3 transition-none" href="#">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Reports</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 px-6 py-4 flex items-center gap-3 hover:bg-slate-300 dark:hover:bg-slate-700 transition-none" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Customers</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 px-6 py-4 flex items-center gap-3 hover:bg-slate-300 dark:hover:bg-slate-700 transition-none" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-xs font-medium uppercase tracking-widest font-inter">Settings</span>
+</a>
+</nav>
+<div class="mt-auto p-6 border-t border-slate-300 dark:border-slate-700">
+<button class="w-full bg-primary text-on-primary py-3 px-4 font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-primary-dim transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                        New Transaction
+                    </button>
+<div class="mt-6 flex items-center gap-3">
+<img class="w-10 h-10 grayscale object-cover" data-alt="close-up portrait of a professional store manager in a minimalist white studio background with soft overhead lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLzLgTpmkwbY7es0ozuz7NF9Yy5HpzRQm2htpj_fjMXWHHxffSV-xsPrIlCXH-lMsUADYITB4X9ChCAdbqvgzCxJBKPyDa6iYxzYiBpD75BXCrXChtEmUiXWZDaQAVGKwpZf9TLWVnodE8-EEn2M7FVsROJILkwuxe_2Nky0eOUVsQ9VE-7zqh6CE9Q5xL-XpbF61vACSRK0I8w1JLtqw5fb6ub_gcztrnU88RCoHUskfgRUoFeoOTS8d33YPPNNQHJIQfquP1BSo"/>
+<div>
+<div class="text-xs font-bold uppercase text-slate-900 dark:text-white leading-none">Store Manager</div>
+<div class="text-[10px] text-slate-500 uppercase mt-1">ID: #8821</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Workspace -->
+<main class="flex-1 ml-64 overflow-y-auto architectural-grid min-h-screen">
+<div class="p-8 max-w-7xl mx-auto">
+<!-- Page Header -->
+<header class="mb-12 flex justify-between items-end">
+<div>
+<div class="text-xs font-medium uppercase tracking-[0.2em] text-secondary mb-2">Operational Analytics</div>
+<h1 class="text-5xl font-extrabold font-headline tracking-tighter text-on-surface uppercase leading-none">Store Insights</h1>
+</div>
+<div class="flex gap-4">
+<div class="bg-surface-container-high px-4 py-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="calendar_month">calendar_month</span>
+<span class="text-xs font-bold uppercase tracking-widest">Q3 Performance</span>
+</div>
+<button class="bg-primary-container px-4 py-2 text-xs font-bold uppercase tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="download">download</span>
+                                Export Report
+                            </button>
+</div>
+</header>
+<!-- Revenue Forecast Detailed Chart -->
+<section class="mb-12">
+<div class="bg-surface-container-lowest p-8 border-b-2 border-primary relative">
+<div class="flex justify-between items-start mb-8">
+<div>
+<h2 class="text-xl font-bold font-headline tracking-tight uppercase text-primary">Revenue Forecast</h2>
+<p class="text-xs text-on-surface-variant uppercase tracking-widest mt-1">Projected vs Actual Gross Margin</p>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 bg-primary"></div>
+<span class="text-[10px] font-bold uppercase tracking-widest">Actual</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 border border-primary"></div>
+<span class="text-[10px] font-bold uppercase tracking-widest">Forecast</span>
+</div>
+</div>
+</div>
+<!-- Mock Chart Visualization -->
+<div class="h-80 w-full flex items-end gap-1 px-4 border-b border-surface-container-high relative">
+<!-- Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-20">
+<div class="border-t border-on-surface-variant w-full"></div>
+<div class="border-t border-on-surface-variant w-full"></div>
+<div class="border-t border-on-surface-variant w-full"></div>
+<div class="border-t border-on-surface-variant w-full"></div>
+</div>
+<!-- Chart Bars -->
+<div class="flex-1 bg-surface-container-low h-[40%] group relative">
+<div class="absolute inset-0 bg-primary opacity-20 h-[35%] bottom-0 mt-auto"></div>
+</div>
+<div class="flex-1 bg-surface-container-low h-[55%] group relative">
+<div class="absolute inset-0 bg-primary opacity-40 h-[45%] bottom-0 mt-auto"></div>
+</div>
+<div class="flex-1 bg-surface-container-low h-[45%] group relative">
+<div class="absolute inset-0 bg-primary opacity-60 h-[50%] bottom-0 mt-auto"></div>
+</div>
+<div class="flex-1 bg-surface-container-low h-[70%] group relative">
+<div class="absolute inset-0 bg-primary h-[65%] bottom-0 mt-auto"></div>
+</div>
+<div class="flex-1 bg-surface-container-low h-[85%] group relative">
+<div class="absolute inset-0 bg-primary h-[80%] bottom-0 mt-auto"></div>
+</div>
+<div class="flex-1 bg-surface-container-low h-[60%] group relative">
+<div class="absolute inset-0 bg-primary opacity-80 h-[55%] bottom-0 mt-auto"></div>
+</div>
+<div class="flex-1 bg-surface-container-low h-[75%] group relative">
+<div class="absolute inset-0 bg-primary h-[70%] bottom-0 mt-auto"></div>
+</div>
+<div class="flex-1 bg-surface-container-low h-[90%] group relative">
+<div class="absolute inset-0 bg-primary h-[85%] bottom-0 mt-auto"></div>
+</div>
+<div class="flex-1 bg-surface-container-low h-[65%] group relative">
+<div class="absolute inset-0 bg-primary opacity-50 h-[60%] bottom-0 mt-auto"></div>
+</div>
+<div class="flex-1 bg-surface-container-low h-[45%] group relative">
+<div class="absolute inset-0 bg-primary opacity-30 h-[40%] bottom-0 mt-auto"></div>
+</div>
+<div class="flex-1 bg-surface-container-low h-[55%] group relative">
+<div class="absolute inset-0 bg-primary opacity-60 h-[50%] bottom-0 mt-auto"></div>
+</div>
+<div class="flex-1 bg-surface-container-low h-[80%] group relative">
+<div class="absolute inset-0 bg-primary h-[75%] bottom-0 mt-auto"></div>
+</div>
+</div>
+<div class="flex justify-between mt-4">
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">01 Jan</span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">15 Jan</span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">30 Jan</span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">14 Feb</span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">28 Feb</span>
+</div>
+</div>
+</section>
+<!-- Payment Methods & Secondary Insights -->
+<div class="grid grid-cols-12 gap-8">
+<!-- Payment Breakdown -->
+<div class="col-span-5 bg-surface-container-highest p-8">
+<h2 class="text-xl font-bold font-headline tracking-tight uppercase mb-8">Payment Methods</h2>
+<div class="space-y-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-lowest flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="credit_card">credit_card</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-end mb-1">
+<span class="text-xs font-bold uppercase tracking-widest">Credit Card</span>
+<span class="text-xs font-medium font-body tracking-wider">64%</span>
+</div>
+<div class="w-full h-2 bg-surface-container-low">
+<div class="h-full bg-primary" style="width: 64%"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-lowest flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="payments">payments</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-end mb-1">
+<span class="text-xs font-bold uppercase tracking-widest">Cash</span>
+<span class="text-xs font-medium font-body tracking-wider">22%</span>
+</div>
+<div class="w-full h-2 bg-surface-container-low">
+<div class="h-full bg-secondary" style="width: 22%"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-lowest flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="contactless">contactless</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-end mb-1">
+<span class="text-xs font-bold uppercase tracking-widest">NFC / Digital</span>
+<span class="text-xs font-medium font-body tracking-wider">14%</span>
+</div>
+<div class="w-full h-2 bg-surface-container-low">
+<div class="h-full bg-on-surface-variant" style="width: 14%"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-12 pt-8 border-t border-surface-variant">
+<div class="text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant mb-4">Top Transaction Density</div>
+<div class="flex items-center justify-between">
+<div class="text-3xl font-black font-headline tracking-tighter">12:00 - 14:00</div>
+<div class="text-xs font-bold bg-error-container text-on-error-container px-2 py-1 uppercase">+12% Peak</div>
+</div>
+</div>
+</div>
+<!-- Data Grid of Inventory Velocity -->
+<div class="col-span-7 bg-surface-container-lowest p-8 overflow-hidden">
+<div class="flex justify-between items-center mb-8">
+<h2 class="text-xl font-bold font-headline tracking-tight uppercase">Inventory Velocity</h2>
+<button class="text-[10px] font-bold uppercase tracking-widest underline decoration-2 underline-offset-4">Full Inventory</button>
+</div>
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high">
+<th class="p-3 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Product SKU</th>
+<th class="p-3 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant text-right">Stock</th>
+<th class="p-3 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant text-right">Daily Turn</th>
+<th class="p-3 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant text-right">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="p-3 font-medium text-xs font-label">#SKU-9902-XL</td>
+<td class="p-3 text-right text-xs font-label">1,240</td>
+<td class="p-3 text-right text-xs font-label">42.5</td>
+<td class="p-3 text-right">
+<span class="text-[10px] font-bold uppercase px-2 py-1 bg-primary-container text-on-primary-container">Optimal</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="p-3 font-medium text-xs font-label">#SKU-4412-SM</td>
+<td class="p-3 text-right text-xs font-label">142</td>
+<td class="p-3 text-right text-xs font-label">88.1</td>
+<td class="p-3 text-right">
+<span class="text-[10px] font-bold uppercase px-2 py-1 bg-error-container text-on-error-container">Low Stock</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="p-3 font-medium text-xs font-label">#SKU-1029-MD</td>
+<td class="p-3 text-right text-xs font-label">842</td>
+<td class="p-3 text-right text-xs font-label">12.4</td>
+<td class="p-3 text-right">
+<span class="text-[10px] font-bold uppercase px-2 py-1 bg-surface-container-high text-on-surface-variant">Stagnant</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="p-3 font-medium text-xs font-label">#SKU-8827-LG</td>
+<td class="p-3 text-right text-xs font-label">2,110</td>
+<td class="p-3 text-right text-xs font-label">31.0</td>
+<td class="p-3 text-right">
+<span class="text-[10px] font-bold uppercase px-2 py-1 bg-primary-container text-on-primary-container">Optimal</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="p-3 font-medium text-xs font-label">#SKU-0034-OS</td>
+<td class="p-3 text-right text-xs font-label">45</td>
+<td class="p-3 text-right text-xs font-label">112.5</td>
+<td class="p-3 text-right">
+<span class="text-[10px] font-bold uppercase px-2 py-1 bg-error-container text-on-error-container">Critical</span>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- Visual Density Indicator -->
+<div class="mt-10 h-48 w-full relative overflow-hidden bg-surface-container-low">
+<img class="absolute inset-0 w-full h-full object-cover grayscale opacity-30 mix-blend-multiply" data-alt="minimalist overhead architectural photograph of a modern retail space with clean lines and structured aisles under industrial lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATVHA9f1nrsHJsNbRwR7mALwDHxXUn_K_5P4dt1xktGHglCvqp4Q1tFhF9Xz55wpHUw4tJsBDh1zGPNzL9QQ7m2NZ9hcF4hMSdRZwOmXgPVxvXNb_6bmhZCasH5BHKev1kmsvJTHujj7WD_mLXS3Sa93m22D5TjYW5kNn03aw9b6aus6-2dPOap9X1Bozlilc61IPzPxGTqIQQhCbnLXCjlEEl1BsBu14mGgb1W40G-eMHoVQhHDAT7iN8p84pUbXpcF7SxTygjuc"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest to-transparent"></div>
+<div class="absolute bottom-6 left-6 right-6 flex items-end justify-between">
+<div class="text-4xl font-black font-headline tracking-tighter uppercase leading-none">Aisle Velocity Map</div>
+<span class="material-symbols-outlined text-3xl" data-icon="map">map</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Data -->
+<footer class="mt-12 py-8 border-t border-surface-variant flex justify-between items-center text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">
+<div>System Status: All Terminals Online</div>
+<div class="flex gap-8">
+<span>Last Sync: 12:44:02 UTC</span>
+<span>Engine v4.2.1-ARCH</span>
+</div>
+</footer>
+</div>
+</main>
+</div>
+</div>
+</body></html>
