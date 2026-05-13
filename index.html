@@ -1,295 +1,217 @@
-<!doctype html>
-<html lang="en" dir="ltr" class="light">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Monolith POS | Swiss Minimal</title>
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Changa:wght@200..800&display=swap"
-    rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-    rel="stylesheet" />
-  <style>
-    body {
-      font-family: "Inter", sans-serif;
-      background-color: #ffffff;
-      color: #111111;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POS | Soft Scandi Minimal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f9f8f6;
+            --text: #4a4a4a;
+            --accent: #d8d0c5;
+        }
 
-    [dir="rtl"],
-    [dir="rtl"] *:not(.material-symbols-outlined) {
-      font-family: "Changa", sans-serif !important;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    /* Typography Overrides for Changa */
-    [dir="rtl"] h1,
-    [dir="rtl"] h2,
-    [dir="rtl"] h3,
-    [dir="rtl"] .font-black {
-      font-weight: 800 !important;
-      font-variation-settings: "wght" 800 !important;
-    }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
 
-    [dir="rtl"] p,
-    [dir="rtl"] .text-lg,
-    [dir="rtl"] .text-sm,
-    [dir="rtl"] .text-xl {
-      font-size: 1em !important;
-      font-weight: 500 !important;
-      font-variation-settings: "wght" 500 !important;
-      line-height: normal;
-    }
+        .container {
+            height: 100svh;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
 
-    [dir="rtl"] h1 span,
-    [dir="rtl"] h2 span {
-      font-size: inherit;
-    }
+        header {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
 
-    * {
-      border-radius: 0px !important;
-    }
+        header h1 {
+            font-size: 4rem;
+            font-weight: 300;
+            letter-spacing: -1px;
+            color: #222;
+            margin-bottom: 1rem;
+        }
 
-    .red-brand {
-      color: #f43f5e;
-    }
+        header p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            max-width: 600px;
+            color: #777;
+        }
 
-    .bg-red-brand {
-      background-color: #f43f5e;
-    }
+        .feature-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            padding: 8rem 0;
+            align-items: center;
+        }
 
-    .swiss-border {
-      border-top: 2px solid #111111;
-    }
-  </style>
+        .feature-block.reverse {
+            grid-template-columns: 1fr 1fr;
+            direction: rtl;
+        }
+
+        .feature-block.reverse>* {
+            direction: ltr;
+        }
+
+        .text-content h2 {
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            color: #222;
+        }
+
+        .text-content p {
+            font-size: 1.1rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .tag {
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: 1px solid var(--accent);
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .image-content {
+            position: relative;
+        }
+
+        .image-content::after {
+            content: '';
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            right: -2rem;
+            bottom: -2rem;
+            background: var(--accent);
+            z-index: -1;
+        }
+
+        .image-content img {
+            width: 100%;
+            display: block;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.03);
+        }
+
+        .grid-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4rem;
+            padding: 8rem 0;
+            border-top: 1px solid var(--accent);
+        }
+
+        .mini-feature h3 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: #222;
+        }
+
+        .mini-feature p {
+            font-size: 1rem;
+            font-weight: 300;
+            color: #666;
+        }
+    </style>
 </head>
 
-<body class="overflow-x-hidden selection:bg-black selection:text-white transition-all duration-300">
-  <nav
-    class="fixed w-full z-50 text-black px-8 md:px-16 py-8 flex justify-between items-center pointer-events-auto bg-white/90 backdrop-blur-md border-b-2 border-black">
-    <div class="text-2xl font-black uppercase tracking-tighter" data-ar="مونوليث">
-      Monolith
-    </div>
-    <div class="flex items-center gap-6">
-      <button id="langToggleSwiss"
-        class="text-xs font-black tracking-widest uppercase hover:text-red-500 transition-colors">
-        عربي / AR
-      </button>
-      <button
-        class="bg-black text-white px-6 py-2.5 text-xs font-black uppercase tracking-widest hover:bg-zinc-800 transition-colors"
-        data-ar="احجز عرضاً">
-        Book Demo
-      </button>
-    </div>
-  </nav>
+<body>
 
-  <header class="min-h-screen flex flex-col justify-end p-8 md:p-16 pb-32 bg-[#eeeeee] relative pt-32">
-    <div class="absolute inset-0 z-0 flex items-center justify-center p-16 pt-32">
-      <img src="images/checkout.png"
-        class="w-full max-w-6xl shadow-2xl opacity-80 mix-blend-multiply filter grayscale contrast-125" />
-    </div>
-    <div
-      class="z-10 relative mt-auto bg-white/80 p-8 md:p-12 inline-block max-w-4xl backdrop-blur-sm border-2 border-black">
-      <h1 class="text-[8vw] md:text-8xl font-black uppercase tracking-tighter leading-[0.8] mb-8"
-        data-ar="النظام <span class='red-brand'>٠١</span><br>نقاط البيع.">
-        System <span class="red-brand">01</span><br />Point of Sale.
-      </h1>
-      <div class="flex flex-col gap-8">
-        <p class="text-xl md:text-2xl font-medium tracking-tight"
-          data-ar="البنية التحتية المثالية لقطاع التجزئة. قدرة معالجة مبنية لسرعة لا مثيل لها وموثوقية مطلقة.">
-          The ultimate retail infrastructure. Processing capacity built for
-          unmatched speed and absolute reliability.
-        </p>
-      </div>
-    </div>
-  </header>
+    <header class="container">
+        <h1>Breathe. Sell. Grow.</h1>
+        <p>A point of sale environment designed for calm, focused operations. Remove the noise and center your retail
+            experience.</p>
+    </header>
 
-  <section class="px-8 md:px-16 py-32 swiss-border">
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-16">
-      <div class="col-span-12 md:col-span-4">
-        <h2 class="text-4xl font-black uppercase tracking-tighter mb-4" data-ar="الوحدات الأساسية">
-          Core Modules
-        </h2>
-        <p class="text-lg text-zinc-500 font-medium" data-ar="كل واجهة وظيفية تم تصميمها للعمل كآلة.">
-          Every interface designed to function as a machine.
-        </p>
-      </div>
-      <div class="col-span-12 md:col-span-8 flex flex-col gap-16">
-        <!-- Terminal Checkout -->
-        <div class="group border-t border-zinc-200 pt-8">
-          <div class="flex justify-between items-start mb-8">
-            <h3
-              class="text-5xl md:text-6xl font-black uppercase tracking-tighter group-hover:text-[#f43f5e] transition-colors"
-              data-ar="المعالجة الأولية">
-              Checkout Terminal
-            </h3>
-            <span class="text-xl font-bold font-mono tracking-tighter">0.1</span>
-          </div>
-          <div class="flex flex-col md:flex-row gap-12 items-start">
-            <div class="w-full md:w-1/3">
-              <p class="text-lg leading-relaxed mb-6"
-                data-ar="شاشة الصراف المخصصة. تدعم الخصومات، معالجة سريع للباركود، والتحكم الفوري بالأسعار.">
-                The dedicated cashier screen. Supports line-item discounts,
-                rapid barcode processing, and live subtotaling.
-              </p>
-              <p class="text-sm font-bold uppercase tracking-widest text-zinc-400">
-                Card • Cash • Mobile Pay
-              </p>
+    <main class="container">
+        <div class="feature-block">
+            <div class="text-content">
+                <h2>Effortless Checkout</h2>
+                <p>Process transactions in a tranquil interface. Our checkout terminal is streamlined to reduce
+                    cognitive load while accepting all major digital payment methods seamlessly.</p>
+                <div class="tags">
+                    <span class="tag">Apple Pay</span>
+                    <span class="tag">Google Pay</span>
+                    <span class="tag">NFC / EMV</span>
+                </div>
             </div>
-            <div class="w-full md:w-2/3 border-2 border-black bg-zinc-100 overflow-hidden">
-              <img src="images/checkout.png"
-                class="w-full shadow-xl filter grayscale group-hover:grayscale-0 transition-all duration-500 mix-blend-multiply" />
+            <div class="image-content">
+                <img src="../images/checkout.png" alt="Checkout">
             </div>
-          </div>
         </div>
 
-        <!-- Analytics -->
-        <div class="group border-t border-zinc-200 pt-8">
-          <div class="flex justify-between items-start mb-8">
-            <h3
-              class="text-5xl md:text-6xl font-black uppercase tracking-tighter group-hover:text-[#f43f5e] transition-colors"
-              data-ar="التحليلات">
-              Analytics
-            </h3>
-            <span class="text-xl font-bold font-mono tracking-tighter">0.2</span>
-          </div>
-          <div class="flex flex-col md:flex-row gap-12 items-start">
-            <p class="text-lg w-full md:w-1/3 leading-relaxed"
-              data-ar="خط مباشر لإحصاءات الإيرادات. تتبع منطق المخزون، وتوقعات المبيعات مباشرة.">
-              Direct pipeline to revenue statistics. Track inventory logic,
-              sales forecasts, and payment distributions immediately.
-            </p>
-            <div class="w-full md:w-2/3 border-2 border-black bg-zinc-100 overflow-hidden">
-              <img src="images/reports.png"
-                class="w-full shadow-xl filter grayscale group-hover:grayscale-0 transition-all duration-500 mix-blend-multiply" />
+        <div class="feature-block reverse">
+            <div class="text-content">
+                <h2>Conscious Inventory</h2>
+                <p>Stay deeply connected to your stock. The inventory management system provides gentle, custom alerts
+                    for different stock events, so you are never caught off guard.</p>
             </div>
-          </div>
+            <div class="image-content">
+                <img src="../images/inventory.png" alt="Inventory">
+            </div>
         </div>
 
-        <!-- Inventory -->
-        <div class="group border-t border-zinc-200 pt-8">
-          <div class="flex justify-between items-start mb-8">
-            <h3
-              class="text-5xl md:text-6xl font-black uppercase tracking-tighter group-hover:text-[#f43f5e] transition-colors"
-              data-ar="المخزون">
-              Inventory
-            </h3>
-            <span class="text-xl font-bold font-mono tracking-tighter">0.3</span>
-          </div>
-          <div class="flex flex-col md:flex-row gap-12 items-start">
-            <p class="text-lg w-full md:w-1/3 leading-relaxed"
-              data-ar="صنف. رتب. أبحث. حدد شذوذ المخزون المنخفض عبر آلاف، وملايين المنتجات في أجزاء من الثانية.">
-              Categorize. Sort. Search. Identify low-stock anomalies across
-              thousands of SKUs in milliseconds.
-            </p>
-            <div class="w-full md:w-2/3 border-2 border-black bg-zinc-100 overflow-hidden">
-              <img src="images/inventory.png"
-                class="w-full shadow-xl filter grayscale group-hover:grayscale-0 transition-all duration-500 mix-blend-multiply" />
+        <div class="feature-block">
+            <div class="text-content">
+                <h2>System Harmony</h2>
+                <p>Tailor the environment to your exact specifications. Our system settings allow you to effortlessly
+                    modify taxes, adjust the visual theme, and update your store name and system info.</p>
             </div>
-          </div>
+            <div class="image-content">
+                <img src="../images/reports.png" alt="Reports">
+            </div>
+        </div>
+        <div class="grid-features">
+            <div class="mini-feature">
+                <h3>Analytical Reports</h3>
+                <p>Understand your business flows. Access deeply insightful analytical reports without overwhelming
+                    dashboards.</p>
+            </div>
+            <div class="mini-feature">
+                <h3>Customer Relationships</h3>
+                <p>Cultivate loyalty through our minimal customer registration interface, seamlessly tied into the
+                    transaction flow.</p>
+            </div>
+            <div class="mini-feature">
+                <h3>Hardware Harmony</h3>
+                <p>Plug-and-play integration with hardware barcode scanners and receipt printers. Technology that fades
+                    into the background.</p>
+            </div>
         </div>
 
-        <!-- Transactions -->
-        <div class="group border-t border-zinc-200 pt-8">
-          <div class="flex justify-between items-start mb-8">
-            <h3
-              class="text-5xl md:text-6xl font-black uppercase tracking-tighter group-hover:text-[#f43f5e] transition-colors"
-              data-ar="سجلات الفواتير">
-              Ledger & Receipts
-            </h3>
-            <span class="text-xl font-bold font-mono tracking-tighter">0.4</span>
-          </div>
-          <div class="flex flex-col md:flex-row gap-12 items-start">
-            <p class="text-lg w-full md:w-1/3 leading-relaxed"
-              data-ar="عرض سجل المعاملات التاريخي، إصدار المبالغ المستردة، وإعادة طباعة الإيصالات بضغطة واحدة.">
-              View historical transaction ledger, issue refunds, and reprint
-              receipts with single-click actions.
-            </p>
-            <div class="w-full md:w-2/3 border-2 border-black bg-zinc-100 overflow-hidden p-8 relative">
-              <img src="images/receipts.png"
-                class="w-full shadow-xl filter grayscale group-hover:grayscale-0 transition-all duration-500 border border-zinc-300" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </main>
 
-  <section class="bg-black text-white px-8 md:px-16 py-32">
-    <h2 class="text-[6vw] font-black uppercase tracking-tighter leading-none mb-16 border-b border-zinc-800 pb-16"
-      data-ar="لوجستيات الأجهزة">
-      Hardware Logistics
-    </h2>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
-      <div class="border-t border-zinc-800 pt-8">
-        <span
-          class="text-6xl font-black text-[#f43f5e] tracking-tighter mb-6 block material-symbols-outlined">contactless</span>
-        <h3 class="text-3xl font-black uppercase tracking-tighter mb-4" data-ar="مستويات الدفع">
-          Payment Tiers
-        </h3>
-        <p class="text-lg text-zinc-400 font-medium"
-          data-ar="معالجة مادية موحدة لبطاقات الفيزا/ماستركارد مدعومة بجاهزية تامة لتقنية NFC (آبل باي، جوجل باي).">
-          Standardized for physical Visa/Mastercard processing coupled with
-          absolute NFC readiness (Apple Pay, Google Pay).
-        </p>
-      </div>
-      <div class="border-t border-zinc-800 pt-8">
-        <span
-          class="text-6xl font-black text-[#f43f5e] tracking-tighter mb-6 block material-symbols-outlined transform -scale-x-100">receipt_long</span>
-        <h3 class="text-3xl font-black uppercase tracking-tighter mb-4" data-ar="إخراج الإيصالات">
-          Receipt Output
-        </h3>
-        <p class="text-lg text-zinc-400 font-medium"
-          data-ar="اتصال خالي من العيوب بالطابعة الحرارية. يُخرج الفواتير مفصلة فور نجاح المعاملة، مع إمكانية القطع التلقائي.">
-          Flawless thermal printer connection. Outputs line-item bills and
-          summary calculations automatically upon transaction success.
-        </p>
-      </div>
-      <div class="border-t border-zinc-800 pt-8">
-        <span
-          class="text-6xl font-black text-[#f43f5e] tracking-tighter mb-6 block material-symbols-outlined">qr_code_scanner</span>
-        <h3 class="text-3xl font-black uppercase tracking-tighter mb-4" data-ar="المسح الضوئي">
-          Optic Scan
-        </h3>
-        <p class="text-lg text-zinc-400 font-medium"
-          data-ar="تزامن مباشر مع قوارئ الباركود الليزرية (1D و 2D) لتبسيط عمليات الدفع وجرد المخزون.">
-          Direct synchronization with 1D/2D laser barcode readers to eliminate
-          manual lookup delays during intensive checkouts.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <footer class="px-8 md:px-16 py-32 text-center bg-[#eeeeee] swiss-border flex flex-col items-center">
-    <h2 class="text-5xl md:text-8xl font-black uppercase tracking-tighter mb-12" data-ar="نظام الترقية.">
-      Upgrade Pipeline.
-    </h2>
-    <div class="flex gap-4">
-      <button
-        class="bg-black text-white px-16 py-6 text-xl font-black uppercase tracking-widest hover:bg-[#f43f5e] transition-colors"
-        data-ar="احجز عرضاً للبرنامج">
-        Book a Live Demo
-      </button>
-    </div>
-  </footer>
-
-  <script>
-    const toggleBtnSwiss = document.getElementById("langToggleSwiss");
-    let isArSwiss = false;
-    toggleBtnSwiss.addEventListener("click", () => {
-      isArSwiss = !isArSwiss;
-      document.documentElement.dir = isArSwiss ? "rtl" : "ltr";
-      toggleBtnSwiss.innerText = isArSwiss ? "English / EN" : "عربي / AR";
-
-      // Swap text utilizing data-ar
-      document.querySelectorAll("[data-ar]").forEach((el) => {
-        if (!el.dataset.en) el.dataset.en = el.innerHTML;
-        el.innerHTML = isArSwiss ? el.dataset.ar : el.dataset.en;
-      });
-    });
-  </script>
 </body>
 
 </html>
