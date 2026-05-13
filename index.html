@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>POS | Soft Scandi Minimal</title>
+    <title>POS</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -32,6 +32,26 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
+        }
+
+        .launch-pos {
+            border: 1px solid var(--text);
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .launch-pos:hover {
+            background-color: var(--text);
+            color: var(--bg);
         }
 
         header {
@@ -149,6 +169,7 @@
 <body>
 
     <header class="container">
+        <a class="launch-pos" href="https://pos-hzlf.vercel.app/" target="_blank">Launch POS</a>
         <h1>Breathe. Sell. Grow.</h1>
         <p>A point of sale environment designed for calm, focused operations. Remove the noise and center your retail
             experience.</p>
