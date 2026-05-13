@@ -41,7 +41,7 @@ export default function Customers() {
     }
   };
 
-  const getMockAvatar = (id: string, name: string) => {
+  const getMockAvatar = (_id: string, name: string) => {
     if (name.includes("Marcus"))
       return "https://lh3.googleusercontent.com/aida-public/AB6AXuAF5kOpDV85CQpfzVanvpy5ACV3VBUENOfJrFOpvmkdnkY0DjkPCJTk9bc6ZDXyXhwcP7_ij36V-H4RdDvtICdlTEGDA1fCyssb0ogg63zHJ-tzGfPaQN9ZDSViIa6SrdJGqfPLetkQPEPh5ldzTWySoLwVBPP91RFmcoSmmqy7zWCdEgfOd3IF7KC_K27eKg0REKbK3mgMc0fC_8-r_OZv5iPZJbbPh6wNvcAxXQuxoEpjETTmtpAizV19uyqR30qYRJgvRCmSsEo";
     if (name.includes("Elena"))
