@@ -6,3 +6,7 @@ export const products = pgTable('products', {
     quantity: integer('quantity').notNull().default(0),
     expiry: date('expiry'),
 });
+
+export type Products = typeof products.$inferSelect;
+
+export type InsertedProduct = typeof products.$inferInsert;
