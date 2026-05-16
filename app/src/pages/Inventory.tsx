@@ -5,47 +5,25 @@ import {
   Filter,
   Pencil,
   MoreVertical,
-  ChevronLeft,
-  ChevronRight,
 } from "lucide-react";
-import { mockInventory } from "../data/mockData";
-import clsx from "clsx";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { productsApi } from "../data/productsData";
+import type { Products } from "../data/types";
 
 export default function Inventory() {
-  const getMockImage = (sku: string) => {
-    if (sku.includes("7892"))
-      return "https://lh3.googleusercontent.com/aida-public/AB6AXuCqy8BP4s96KS3VP-H5xHvtbdHKK8iVdxpfTP12wyU39GU6iWHgbnD19m_D6xxexx3bY9uTfNStuDHHMtISvePKKoVe6Md-5EHPbfHo4MsSKQHVzplqidgqFdMfbMNLzigR1mF9BoabIjU6iKZ9q1uRfiCaHMDahDG-OqnHWBN5hol8dFCHiPv2y58CqKyDY-9D9g1Og8j0Sm-N0ADLtrfmm-6v7MpIq0bErJYZA9upI7pOd9PJXmF10H6_afsh09qWTJD2a-QeFFM";
-    if (sku.includes("1200"))
-      return "https://lh3.googleusercontent.com/aida-public/AB6AXuAPsiofBDLnEZbZxNAGs8L3oayc4o_Fd4EbNeQ6bunpDWvmXmVNjQghGEDZxE7fE_-SwQPoGaCa9lwX-_og4Snf4JGfVQAQ-SU8b-G9mvz0IU_vS1rhdW9BKZ0P0n-NMq_HklO6Io_BIYLD2F-ymIU9ZHSFH0dnAScoHJRkwvE8bO43xQ8v1a-26nS--8-o9K3d94_2zpBFxrpSDqiwcEUw5fLDdY3eyk7wam_zx4GglRJnrTWHAMWmUv66qV3cSWYeYXeqg6yDJyQ";
-    return "https://lh3.googleusercontent.com/aida-public/AB6AXuAFOLP4fxgx-7y7pkqveMIN3qf5zxpNF5-1Q59C5FlQ-QLVBZfUcGO_in8rzzRnzbVrAx4GyiwuKO6_ttbN2swzyKKn4-3Y8Oc-FAscviaISmVrEPA817FrGDgXrQBaD81siCyfDuOAHQoiyKu9-B3WrjPEGnweCQyi2m3P2sKbLuHUXmkv4mEb0x-YOQ-oZm2PUAkAbjbkSQkyQSbUG03RTV-Yr8ETrpqTCzKf80ZbWi7MMn73XOHIczZySaCXef_hrGnBbrsPs3M";
-  };
 
-  const getStatusBadge = (stock: number) => {
-    if (stock === 0) {
-      return (
-        <span className="text-[9px] font-black uppercase bg-on-surface text-surface px-2 py-1 tracking-widest">
-          Sold Out
-        </span>
-      );
-    }
-    if (stock < 20) {
-      return (
-        <span className="text-[9px] font-black uppercase bg-error-container text-on-error-container px-2 py-1 tracking-widest">
-          Low Stock
-        </span>
-      );
-    }
-    return (
-      <span className="text-[9px] font-black uppercase bg-surface-container-high text-on-surface px-2 py-1 tracking-widest">
-        In Stock
-      </span>
-    );
-  };
+  const [newProduct, setNewProduct] = useState<Products | {}>({})
+  const [adding, setAdding] = useState<boolean>(false)
 
-  const totalValue = mockInventory.reduce(
-    (sum, item) => sum + item.unitPrice * item.stockLevel,
-    0,
-  );
+  const { data, isPending, isError } = useQuery({
+    queryKey: ["products"],
+    queryFn: async () => await productsApi.get("")
+  })
+  if (data) console.log(data.data)
+
+  if (isError) return <div>Failed to load data</div>
+  else if (isPending) return <div>Loading data ...</div>
 
   return (
     <div className="flex-1 flex flex-col h-full bg-surface overflow-hidden">
@@ -67,10 +45,12 @@ export default function Inventory() {
                 Export CSV
               </span>
             </button>
-            <button className="bg-primary text-on-primary px-4 py-2 flex items-center gap-2 hover:bg-primary-dim transition-colors">
+            <button
+              onClick={() => setAdding(prev => !prev)}
+              className="bg-primary text-on-primary px-4 py-2 flex items-center gap-2 hover:bg-primary-dim transition-colors">
               <Plus size={14} />
               <span className="text-[10px] font-bold uppercase tracking-widest font-body">
-                Add New Product
+                {adding ? "Cancel" : "Add New Product"}
               </span>
             </button>
           </div>
@@ -116,50 +96,34 @@ export default function Inventory() {
             <thead className="sticky top-0 bg-surface-container-high z-10 shadow-sm">
               <tr>
                 <th className="px-4 py-3 text-left text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant border-b border-outline-variant/20 font-body">
-                  SKU ID
+                  ID
                 </th>
                 <th className="px-4 py-3 text-left text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant border-b border-outline-variant/20 font-body">
-                  Product Specification
+                  Name
                 </th>
                 <th className="px-4 py-3 text-left text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant border-b border-outline-variant/20 font-body">
-                  Category
+                  Quantity
                 </th>
                 <th className="px-4 py-3 text-right text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant border-b border-outline-variant/20 font-body">
-                  Unit Price
+                  Expiry
                 </th>
                 <th className="px-4 py-3 text-right text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant border-b border-outline-variant/20 font-body">
-                  Stock Level
-                </th>
-                <th className="px-4 py-3 text-center text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant border-b border-outline-variant/20 font-body">
-                  Status
-                </th>
-                <th className="px-4 py-3 text-right text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant border-b border-outline-variant/20 font-body">
-                  Actions
+                  Controls
                 </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-outline-variant/10">
-              {mockInventory.map((item, idx) => (
+              {data.data.map((item: Products) => (
                 <tr
                   key={item.id}
-                  className={clsx(
-                    "transition-colors group",
-                    idx % 2 === 0
-                      ? "hover:bg-surface-container-low"
-                      : "bg-surface-container-low hover:bg-surface-container-high",
-                  )}
                 >
                   <td className="px-4 py-4 text-[11px] font-bold tracking-tighter text-outline font-mono">
-                    {item.sku}
+                    {item.id}
                   </td>
                   <td className="px-4 py-4">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 bg-surface-container-high overflow-hidden shrink-0">
-                        <img
-                          src={getMockImage(item.sku)}
-                          alt={item.name}
-                          className="w-full h-full object-cover"
-                        />
+                        {/* add an image of the product here */}
                       </div>
                       <div>
                         <div className="text-[12px] font-bold uppercase text-on-surface leading-tight font-headline">
@@ -173,35 +137,13 @@ export default function Inventory() {
                   </td>
                   <td className="px-4 py-4">
                     <span className="text-[10px] font-medium font-body bg-secondary-container text-on-secondary-container px-2 py-0.5 tracking-widest uppercase">
-                      {item.category}
+                      {item.quantity}
                     </span>
                   </td>
                   <td className="px-4 py-4 text-right text-[12px] font-bold font-body text-on-surface">
-                    ${item.unitPrice.toFixed(2)}
+                    {item.expiry}
                   </td>
-                  <td className="px-4 py-4 text-right">
-                    <div
-                      className={clsx(
-                        "text-[12px] font-bold font-body",
-                        item.stockLevel < 20 ? "text-error" : "text-on-surface",
-                      )}
-                    >
-                      {item.stockLevel.toString().padStart(2, "0")}
-                    </div>
-                    <div
-                      className={clsx(
-                        "text-[9px] uppercase font-bold tracking-tighter",
-                        item.stockLevel < 20 ? "text-error" : "text-outline",
-                      )}
-                    >
-                      {item.stockLevel < 20
-                        ? "Threshold: 20"
-                        : "Last sync 2m ago"}
-                    </div>
-                  </td>
-                  <td className="px-4 py-4 text-center">
-                    {getStatusBadge(item.stockLevel)}
-                  </td>
+
                   <td className="px-4 py-4 text-right">
                     <button className="text-outline hover:text-primary transition-colors">
                       <Pencil size={16} />
@@ -212,51 +154,19 @@ export default function Inventory() {
                   </td>
                 </tr>
               ))}
+              <tr className={adding ? "table-row" : "hidden"}>
+                <td>Will be added automatically</td>
+                <td><input type="text" placeholder="Product Name" /></td>
+                <td><input type="text" placeholder="Product Quantity" /></td>
+                <td><input type="text" placeholder="Product Expiry" /></td>
+                <td>...</td>
+              </tr>
             </tbody>
           </table>
         </div>
       </section>
 
-      {/* Pagination & Footer Stats */}
-      <footer className="px-8 py-4 bg-surface-container flex justify-between items-center shrink-0 border-t border-outline-variant/15">
-        <div className="flex items-center gap-6">
-          <div className="flex flex-col">
-            <span className="text-[9px] font-bold font-body uppercase tracking-widest text-outline">
-              Total SKU Count
-            </span>
-            <span className="text-sm font-extrabold font-headline text-on-surface">
-              {mockInventory.length.toString().padStart(4, "0")} Items
-            </span>
-          </div>
-          <div className="w-[1px] h-8 bg-outline-variant/40"></div>
-          <div className="flex flex-col">
-            <span className="text-[9px] font-bold font-body uppercase tracking-widest text-outline">
-              Inventory Value
-            </span>
-            <span className="text-sm font-extrabold font-headline text-on-surface">
-              $
-              {totalValue.toLocaleString("en-US", { minimumFractionDigits: 2 })}
-            </span>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-4">
-          <span className="text-[10px] font-bold font-body uppercase tracking-widest text-outline">
-            Page 1 of 1
-          </span>
-          <div className="flex gap-1">
-            <button className="bg-surface-container-highest p-2 hover:bg-surface-dim transition-colors">
-              <ChevronLeft size={16} />
-            </button>
-            <button className="bg-primary text-on-primary p-2 hover:bg-primary-dim font-body transition-colors">
-              <span className="text-[10px] font-bold px-2">1</span>
-            </button>
-            <button className="bg-surface-container-highest p-2 hover:bg-surface-dim transition-colors">
-              <ChevronRight size={16} />
-            </button>
-          </div>
-        </div>
-      </footer>
+      {/* Pagination & Footer Stats Should Be Added In The Future*/}
     </div>
   );
 }

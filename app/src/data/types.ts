@@ -1,3 +1,10 @@
+export interface Products {
+    id: string;
+    name: string;
+    quantity: number;
+    expiry: string | null;
+}
+
 export interface BaseEntity {
     id: string;
 }
