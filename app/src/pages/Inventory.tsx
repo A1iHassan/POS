@@ -5,21 +5,29 @@ import {
   Filter,
   Pencil,
   MoreVertical,
+  Save,
 } from "lucide-react";
-import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useState, type ChangeEvent } from "react";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { productsApi } from "../data/productsData";
 import type { Products } from "../data/types";
 
 export default function Inventory() {
 
-  const [newProduct, setNewProduct] = useState<Products | {}>({})
+  const [newProduct, setNewProduct] = useState<{ name: string, quantity: number, expiry: string }>({ name: "", quantity: 0, expiry: "" })
   const [adding, setAdding] = useState<boolean>(false)
 
   const { data, isPending, isError } = useQuery({
     queryKey: ["products"],
     queryFn: async () => await productsApi.get("")
   })
+
+  const { data: result, mutate } = useMutation({
+    mutationFn: async (payload: { name: string, quantity: number, expiry: string }) => {
+      return await productsApi.post("", payload)
+    }
+  })
+
   if (data) console.log(data.data)
 
   if (isError) return <div>Failed to load data</div>
@@ -46,7 +54,10 @@ export default function Inventory() {
               </span>
             </button>
             <button
-              onClick={() => setAdding(prev => !prev)}
+              onClick={() => {
+                setAdding(prev => !prev)
+                setNewProduct({ name: "", quantity: 0, expiry: "" })
+              }}
               className="bg-primary text-on-primary px-4 py-2 flex items-center gap-2 hover:bg-primary-dim transition-colors">
               <Plus size={14} />
               <span className="text-[10px] font-bold uppercase tracking-widest font-body">
@@ -95,19 +106,19 @@ export default function Inventory() {
           <table className="w-full border-collapse">
             <thead className="sticky top-0 bg-surface-container-high z-10 shadow-sm">
               <tr>
-                <th className="px-4 py-3 text-left text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant border-b border-outline-variant/20 font-body">
+                <th className="w-100 px-4 py-3 text-left text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant border-b border-outline-variant/20 font-body">
                   ID
                 </th>
-                <th className="px-4 py-3 text-left text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant border-b border-outline-variant/20 font-body">
+                <th className="w-120 px-4 py-3 text-left text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant border-b border-outline-variant/20 font-body">
                   Name
                 </th>
-                <th className="px-4 py-3 text-left text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant border-b border-outline-variant/20 font-body">
+                <th className="w-50 px-4 py-3 text-left text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant border-b border-outline-variant/20 font-body">
                   Quantity
                 </th>
                 <th className="px-4 py-3 text-right text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant border-b border-outline-variant/20 font-body">
                   Expiry
                 </th>
-                <th className="px-4 py-3 text-right text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant border-b border-outline-variant/20 font-body">
+                <th className="w-16 px-4 py-3 text-right text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant border-b border-outline-variant/20 font-body">
                   Controls
                 </th>
               </tr>
@@ -154,12 +165,41 @@ export default function Inventory() {
                   </td>
                 </tr>
               ))}
-              <tr className={adding ? "table-row" : "hidden"}>
-                <td>Will be added automatically</td>
-                <td><input type="text" placeholder="Product Name" /></td>
-                <td><input type="text" placeholder="Product Quantity" /></td>
-                <td><input type="text" placeholder="Product Expiry" /></td>
-                <td>...</td>
+              <tr className={adding ? "" : "hidden"}>
+                <td className="px-4 py-4 text-[10px] font-medium tracking-wider text-outline/70 font-body uppercase">
+                  Will be added automatically
+                </td>
+                <td className="px-4 py-4">
+                  <input
+                    value={newProduct.name}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => { setNewProduct(prv => ({ ...prv, name: e.target.value })) }}
+                    type="text" placeholder="Product Name"
+                    className="w-full bg-surface-container-highest border-none focus:outline-none text-[11px] font-bold tracking-widest uppercase py-2 px-3 placeholder:text-outline/50 text-on-surface" />
+                </td>
+                <td className="px-4 py-4">
+                  <input
+                    value={newProduct.quantity}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => { setNewProduct(prv => ({ ...prv, quantity: Number(e.target.value) })) }}
+                    type="number" min={0} placeholder="Product Quantity"
+                    className="w-full max-w-[140px] bg-surface-container-highest border-none focus:outline-none text-[11px] font-bold tracking-widest uppercase py-2 px-3 placeholder:text-outline/50 text-on-surface" />
+                </td>
+                <td className="px-4 py-4 text-right">
+                  <input
+                    value={newProduct.expiry}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => { setNewProduct(prv => ({ ...prv, expiry: e.target.value })) }}
+                    type="text" placeholder="Product Expiry"
+                    className="w-full max-w-[140px] bg-surface-container-highest border-none focus:outline-none text-[11px] font-bold tracking-widest uppercase py-2 px-3 text-right placeholder:text-outline/50 text-on-surface" />
+                </td>
+                <td className="px-4 py-4 text-right">
+                  <button
+                    disabled={newProduct.name && newProduct.expiry && newProduct.quantity > 0}
+                    onClick={async () => {
+                      mutate(newProduct)
+                    }}
+                    className="text-primary hover:text-outline transition-colors">
+                    <Save size={16} />
+                  </button>
+                </td>
               </tr>
             </tbody>
           </table>
