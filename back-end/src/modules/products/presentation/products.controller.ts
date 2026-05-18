@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Patch, Body, HttpStatus, HttpCode } from '@nestjs/common';
+import { Controller, Get, Post, Patch, Delete, Body, Param, HttpStatus, HttpCode } from '@nestjs/common';
 import { ProductsService } from '../products.service';
 import { NewProductDto } from './dto/createProduct';
 
@@ -16,5 +16,15 @@ export class ProductsController {
     @HttpCode(HttpStatus.CREATED)
     async addProduct(@Body() payload: NewProductDto) {
         return await this.service.addNewProduct(payload)
+    }
+
+    @Patch()
+    async editProduct(@Body() payload: NewProductDto) {
+        return await this.service.editEsixtingProduct(payload)
+    }
+
+    @Delete("/:barcode")
+    async deleteProduct(@Param('barcode') barcode: string) {
+        return await this.service.deleteExistingProduct(barcode)
     }
 }

@@ -5,7 +5,7 @@ export const products = pgTable('products', {
     name: text('name').notNull(),
     quantity: integer('quantity').notNull().default(0),
     expiry: date('expiry'),
-    barcode: text('barcode')
+    barcode: text('barcode').notNull()
 });
 
 export type Products = typeof products.$inferSelect;

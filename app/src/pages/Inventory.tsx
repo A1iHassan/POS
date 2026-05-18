@@ -4,9 +4,9 @@ import {
   Plus,
   Filter,
   Pencil,
-  MoreVertical,
   Save,
   Trash,
+  X,
 } from "lucide-react";
 import { useState, type ChangeEvent } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -16,15 +16,18 @@ import type { Products } from "../data/types";
 export default function Inventory() {
   const queryClient = useQueryClient();
 
-  const [newProduct, setNewProduct] = useState<Products>({ name: "", quantity: 0, expiry: "", barcode: "" })
   const [adding, setAdding] = useState<boolean>(false)
+  const [newProduct, setNewProduct] = useState<Products>({ name: "", quantity: 0, expiry: "", barcode: "" })
+  const [editing, setEditing] = useState<{ active: boolean, barcode: string }>({ active: false, barcode: "" })
+  console.log(editing)
+  const [editProduct, setEditProduct] = useState<Products>({ name: "", quantity: 0, expiry: "", barcode: "" })
 
   const { data, isPending, isError } = useQuery({
     queryKey: ["products"],
     queryFn: async () => await productsApi.get("")
   })
 
-  const { mutate } = useMutation({
+  const { mutate: addNew } = useMutation({
     mutationFn: async (payload: { name: string, quantity: number, expiry: string }) => {
       return await productsApi.post("", payload)
     },
@@ -43,7 +46,36 @@ export default function Inventory() {
     }
   })
 
-  if (data) console.log(data.data)
+  const { mutate: editExisting } = useMutation({
+    mutationFn: async (payload: { name: string, quantity: number, expiry: string }) => {
+      return await productsApi.patch("", payload)
+    },
+    onError: () => {
+      alert(`Failed to edit product ${editExisting.name}!`)
+    },
+    onSuccess: () => {
+      setEditing({ active: false, barcode: "" })
+      setEditProduct({
+        name: "",
+        quantity: 0,
+        expiry: "",
+        barcode: ""
+      })
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+    }
+  })
+
+  const { mutate: deleteProduct } = useMutation({
+    mutationFn: async (barcode: string) => {
+      return await productsApi.delete(`/${barcode}`)
+    },
+    onError: () => {
+      alert(`Failed to delete product!`)
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+    }
+  })
 
   if (isError) return <div>Failed to load data</div>
   else if (isPending) return <div>Loading data ...</div>
@@ -144,38 +176,84 @@ export default function Inventory() {
                   key={item.barcode}
                 >
                   <td className="px-4 py-4 font-bold tracking-tighter text-outline font-mono">
-                    {item.barcode}
+                    {editing.active && editing.barcode === item.barcode ?
+                      <input
+                        value={editProduct.barcode}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => { setEditProduct(prv => ({ ...prv, barcode: e.target.value })) }}
+                        type="text" placeholder="Product Name"
+                        className="w-full bg-surface-container-highest border-none focus:outline-none text-[11px] font-bold tracking-widest uppercase py-2 px-3 placeholder:text-outline/50 text-on-surface" />
+                      :
+                      item.barcode
+                    }
                   </td>
                   <td className="px-4 py-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-surface-container-high overflow-hidden shrink-0">
-                        {/* add an image of the product here */}
-                      </div>
-                      <div>
-                        <div className="text-[12px] font-bold uppercase text-on-surface leading-tight font-headline">
-                          {item.name}
+                    {editing.active && editing.barcode === item.barcode ?
+                      <input
+                        value={editProduct.name}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => { setEditProduct(prv => ({ ...prv, name: e.target.value })) }}
+                        type="text" placeholder="Product Name"
+                        className="w-full bg-surface-container-highest border-none focus:outline-none text-[11px] font-bold tracking-widest uppercase py-2 px-3 placeholder:text-outline/50 text-on-surface" />
+                      :
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-surface-container-high overflow-hidden shrink-0">
+                          {/* add an image of the product here */}
                         </div>
-                        <div className="text-[10px] text-outline uppercase tracking-wider font-body">
-                          Standard Variant
+                        <div>
+                          <div className="text-[12px] font-bold uppercase text-on-surface leading-tight font-headline">
+                            {item.name}
+                          </div>
+                          <div className="text-[10px] text-outline uppercase tracking-wider font-body">
+                            Standard Variant
+                          </div>
                         </div>
-                      </div>
-                    </div>
+                      </div>}
                   </td>
                   <td className="px-4 py-4">
-                    <span className=" font-medium font-body bg-secondary-container text-on-secondary-container px-2 py-0.5 tracking-widest uppercase">
-                      {item.quantity}
-                    </span>
+                    {editing.active && editing.barcode === item.barcode ?
+                      <input
+                        value={editProduct.quantity}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => { setEditProduct(prv => ({ ...prv, quantity: Number(e.target.value) })) }}
+                        type="number" min={0} placeholder="Product Name"
+                        className="w-full bg-surface-container-highest border-none focus:outline-none text-[11px] font-bold tracking-widest uppercase py-2 px-3 placeholder:text-outline/50 text-on-surface" />
+                      :
+                      <span className="text-sm font-medium font-body bg-secondary-container text-on-secondary-container px-2 py-0.5 tracking-widest uppercase">
+                        {item.quantity}
+                      </span>
+                    }
                   </td>
                   <td className="px-4 py-4 text-right text-[12px] font-bold font-body text-on-surface">
-                    {item.expiry}
+                    {editing.active && editing.barcode === item.barcode ?
+                      <input
+                        value={editProduct.expiry}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => { setEditProduct(prv => ({ ...prv, expiry: e.target.value })) }}
+                        type="text" placeholder="Product Name"
+                        className="w-full bg-surface-container-highest border-none focus:outline-none text-[11px] font-bold tracking-widest uppercase py-2 px-3 placeholder:text-outline/50 text-on-surface" />
+                      :
+                      item.expiry}
                   </td>
 
                   <td className="px-4 py-4 text-right">
-                    <button className="text-outline hover:text-primary transition-colors">
-                      <Pencil size={16} />
+                    <button
+                      onClick={() => {
+                        setEditing({ active: !editing.active, barcode: item.barcode })
+                        setEditProduct({
+                          name: item.name,
+                          quantity: item.quantity,
+                          expiry: item.expiry,
+                          barcode: item.barcode
+                        })
+                      }}
+                      className="text-outline hover:text-primary transition-colors">
+                      {editing.active && editing.barcode === item.barcode ? <X size={16} /> : <Pencil size={16} />}
                     </button>
                     <button className="text-outline hover:text-primary ml-2 transition-colors">
-                      <Trash size={16} />
+                      {editing.active && editing.barcode === item.barcode ?
+                        <Save size={16} onClick={() => {
+                          editExisting(editProduct)
+                        }} /> :
+                        <Trash size={16} onClick={() => {
+                          deleteProduct(item.barcode)
+                        }} />}
                     </button>
                   </td>
                 </tr>
@@ -213,7 +291,7 @@ export default function Inventory() {
                   <button
                     disabled={!(newProduct.name && newProduct.expiry && newProduct.quantity > 0)}
                     onClick={async () => {
-                      mutate(newProduct)
+                      addNew(newProduct)
                     }}
                     className="text-primary hover:text-outline transition-colors">
                     <Save size={16} />
