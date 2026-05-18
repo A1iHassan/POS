@@ -6,13 +6,15 @@ import {
   Pencil,
   MoreVertical,
   Save,
+  Trash,
 } from "lucide-react";
 import { useState, type ChangeEvent } from "react";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { productsApi } from "../data/productsData";
 import type { Products } from "../data/types";
 
 export default function Inventory() {
+  const queryClient = useQueryClient();
 
   const [newProduct, setNewProduct] = useState<Products>({ name: "", quantity: 0, expiry: "", barcode: "" })
   const [adding, setAdding] = useState<boolean>(false)
@@ -22,9 +24,22 @@ export default function Inventory() {
     queryFn: async () => await productsApi.get("")
   })
 
-  const { data: result, mutate } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: async (payload: { name: string, quantity: number, expiry: string }) => {
       return await productsApi.post("", payload)
+    },
+    onError: () => {
+      alert("Failed to save new product!")
+    },
+    onSuccess: () => {
+      setAdding(false)
+      setNewProduct({
+        name: "",
+        quantity: 0,
+        expiry: "",
+        barcode: ""
+      })
+      queryClient.invalidateQueries({ queryKey: ["products"] });
     }
   })
 
@@ -160,7 +175,7 @@ export default function Inventory() {
                       <Pencil size={16} />
                     </button>
                     <button className="text-outline hover:text-primary ml-2 transition-colors">
-                      <MoreVertical size={16} />
+                      <Trash size={16} />
                     </button>
                   </td>
                 </tr>
