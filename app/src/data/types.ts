@@ -1,5 +1,5 @@
 export interface Products {
-    id: string | undefined;
+    barcode: string;
     name: string;
     quantity: number;
     expiry: string | null;

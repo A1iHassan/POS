@@ -14,7 +14,7 @@ import type { Products } from "../data/types";
 
 export default function Inventory() {
 
-  const [newProduct, setNewProduct] = useState<{ name: string, quantity: number, expiry: string }>({ name: "", quantity: 0, expiry: "" })
+  const [newProduct, setNewProduct] = useState<Products>({ name: "", quantity: 0, expiry: "", barcode: "" })
   const [adding, setAdding] = useState<boolean>(false)
 
   const { data, isPending, isError } = useQuery({
@@ -56,7 +56,7 @@ export default function Inventory() {
             <button
               onClick={() => {
                 setAdding(prev => !prev)
-                setNewProduct({ name: "", quantity: 0, expiry: "" })
+                setNewProduct({ name: "", quantity: 0, expiry: "", barcode: "" })
               }}
               className="bg-primary text-on-primary px-4 py-2 flex items-center gap-2 hover:bg-primary-dim transition-colors">
               <Plus size={14} />
@@ -107,7 +107,7 @@ export default function Inventory() {
             <thead className="sticky top-0 bg-surface-container-high z-10 shadow-sm">
               <tr>
                 <th className="w-100 px-4 py-3 text-left text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant border-b border-outline-variant/20 font-body">
-                  ID
+                  Barcode
                 </th>
                 <th className="w-120 px-4 py-3 text-left text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant border-b border-outline-variant/20 font-body">
                   Name
@@ -124,12 +124,12 @@ export default function Inventory() {
               </tr>
             </thead>
             <tbody className="divide-y divide-outline-variant/10">
-              {data.data.map((item: Products) => (
+              {data?.data?.map((item: Products) => (
                 <tr
-                  key={item.id}
+                  key={item.barcode}
                 >
-                  <td className="px-4 py-4 text-[11px] font-bold tracking-tighter text-outline font-mono">
-                    {item.id}
+                  <td className="px-4 py-4 font-bold tracking-tighter text-outline font-mono">
+                    {item.barcode}
                   </td>
                   <td className="px-4 py-4">
                     <div className="flex items-center gap-3">
@@ -147,7 +147,7 @@ export default function Inventory() {
                     </div>
                   </td>
                   <td className="px-4 py-4">
-                    <span className="text-[10px] font-medium font-body bg-secondary-container text-on-secondary-container px-2 py-0.5 tracking-widest uppercase">
+                    <span className=" font-medium font-body bg-secondary-container text-on-secondary-container px-2 py-0.5 tracking-widest uppercase">
                       {item.quantity}
                     </span>
                   </td>
@@ -166,8 +166,12 @@ export default function Inventory() {
                 </tr>
               ))}
               <tr className={adding ? "" : "hidden"}>
-                <td className="px-4 py-4 text-[10px] font-medium tracking-wider text-outline/70 font-body uppercase">
-                  Will be added automatically
+                <td className="px-4 py-4">
+                  <input
+                    value={newProduct.barcode}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => { setNewProduct(prv => ({ ...prv, barcode: e.target.value })) }}
+                    type="text" placeholder="Product Name"
+                    className="w-full bg-surface-container-highest border-none focus:outline-none text-[11px] font-bold tracking-widest uppercase py-2 px-3 placeholder:text-outline/50 text-on-surface" />
                 </td>
                 <td className="px-4 py-4">
                   <input
@@ -192,7 +196,7 @@ export default function Inventory() {
                 </td>
                 <td className="px-4 py-4 text-right">
                   <button
-                    disabled={newProduct.name && newProduct.expiry && newProduct.quantity > 0}
+                    disabled={!(newProduct.name && newProduct.expiry && newProduct.quantity > 0)}
                     onClick={async () => {
                       mutate(newProduct)
                     }}

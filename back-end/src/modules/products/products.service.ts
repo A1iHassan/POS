@@ -9,8 +9,13 @@ export class ProductsService {
         @Inject(dbClient) private readonly db: NodePgDatabase<typeof schema>
     ) { }
 
-    async getAllProducts(): Promise<schema.Products[]> {
-        return await this.db.select().from(schema.products)
+    async getAllProducts() {
+        return await this.db.select({
+            name: schema.products.name,
+            quantity: schema.products.quantity,
+            expiry: schema.products.expiry,
+            barcode: schema.products.barcode
+        }).from(schema.products)
     }
 
     async addNewProduct(payload: schema.InsertedProduct) {

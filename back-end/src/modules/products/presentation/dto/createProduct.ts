@@ -13,6 +13,9 @@ export class NewProductDto {
 
     @IsString()
     expiry: string
+
+    @IsString()
+    barcode: string
 }
 
 type InsertedProduct = {
