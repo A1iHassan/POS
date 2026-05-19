@@ -28,7 +28,7 @@ export default function Inventory() {
   })
 
   const { mutate: addNew } = useMutation({
-    mutationFn: async (payload: { name: string, quantity: number, expiry: string }) => {
+    mutationFn: async (payload: Products) => {
       return await productsApi.post("", payload)
     },
     onError: () => {
@@ -47,7 +47,7 @@ export default function Inventory() {
   })
 
   const { mutate: editExisting } = useMutation({
-    mutationFn: async (payload: { name: string, quantity: number, expiry: string }) => {
+    mutationFn: async (payload: Products) => {
       return await productsApi.patch("", payload)
     },
     onError: () => {
@@ -224,7 +224,7 @@ export default function Inventory() {
                   <td className="px-4 py-4 text-right text-[12px] font-bold font-body text-on-surface">
                     {editing.active && editing.barcode === item.barcode ?
                       <input
-                        value={editProduct.expiry}
+                        value={editProduct.expiry || ""}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => { setEditProduct(prv => ({ ...prv, expiry: e.target.value })) }}
                         type="text" placeholder="Product Name"
                         className="w-full bg-surface-container-highest border-none focus:outline-none text-[11px] font-bold tracking-widest uppercase py-2 px-3 placeholder:text-outline/50 text-on-surface" />
@@ -282,7 +282,7 @@ export default function Inventory() {
                 </td>
                 <td className="px-4 py-4 text-right">
                   <input
-                    value={newProduct.expiry}
+                    value={newProduct.expiry || ""}
                     onChange={(e: ChangeEvent<HTMLInputElement>) => { setNewProduct(prv => ({ ...prv, expiry: e.target.value })) }}
                     type="text" placeholder="Product Expiry"
                     className="w-full max-w-[140px] bg-surface-container-highest border-none focus:outline-none text-[11px] font-bold tracking-widest uppercase py-2 px-3 text-right placeholder:text-outline/50 text-on-surface" />
