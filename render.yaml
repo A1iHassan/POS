@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: pos-backend
+    env: node
+    rootDir: back-end
+    buildCommand: bun install && bun run build
+    startCommand: bun run start:prod
+    envVars:
+      - key: DATABASE_URL
+        sync: false
