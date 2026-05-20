@@ -8,6 +8,12 @@ export const products = pgTable('products', {
     barcode: text('barcode').notNull()
 });
 
+export const users = pgTable('users', {
+    id: uuid('id').primaryKey().defaultRandom(),
+    name: text('name').notNull(),
+    password: text('name').notNull()
+})
+
 export type Products = typeof products.$inferSelect;
 
 export type InsertedProduct = typeof products.$inferInsert;

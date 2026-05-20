@@ -17,10 +17,3 @@ export class NewProductDto {
     @IsString()
     barcode: string
 }
-
-type InsertedProduct = {
-    name: string;
-    id?: string | undefined;
-    quantity?: number | undefined;
-    expiry?: string | null | undefined;
-}
