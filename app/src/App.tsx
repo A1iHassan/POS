@@ -7,6 +7,7 @@ import Inventory from "./pages/Inventory";
 import Analytics from "./pages/Analytics";
 import Customers from "./pages/Customers";
 import Settings from "./pages/Settings";
+import Auth from "./pages/auth";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -22,6 +23,7 @@ function App() {
       <Routes>
         <Route element={<AppLayout />}>
           <Route path="/" element={<Checkout />} />
+          <Route path="/auth" element={<Auth />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/transactions" element={<Transactions />} />
           <Route path="/inventory" element={<Inventory />} />
