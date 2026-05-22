@@ -1,16 +1,43 @@
-import { useState, useRef } from "react"
+import { useState, useRef, type SubmitEvent } from "react"
+import { useMutation } from "@tanstack/react-query"
 import { Eye, EyeClosed } from "lucide-react"
 import { authApi } from "../api/auth"
+import { useNavigate } from "react-router-dom"
+
+interface NewUser {
+    name: string,
+    password: string
+}
 
 const Auth = () => {
     const [authState, setAuthState] = useState<"login" | "signup">("login")
     const [showPass, setShowPass] = useState<boolean>(false)
-    const [userData, setUserData] = useState<{ name: string, password: string }>({ name: "", password: "" })
+    const [userData, setUserData] = useState<NewUser>({ name: "", password: "" })
     console.log(userData)
     const timeoutRef = useRef(null)
+    const navigate = useNavigate()
+
+    const { mutate: createUser } = useMutation({
+        mutationFn: async (payload: NewUser) => { await authApi.post("/signup", payload) },
+        onSuccess: () => alert("User created successfully"),
+        onError: () => alert("Failed to create user ... try again later")
+    })
+
+    const { mutate: logUser } = useMutation({
+        mutationFn: async (payload: NewUser) => { await authApi.post("/login", payload) },
+        onSuccess: () => navigate("/checkout"),
+        onError: () => alert("Failed to authenticate user ... check your credentials")
+    })
 
     return <div className="w-screen h-screen flex gap-3 justify-center items-center">
-        <form className="flex flex-col gap-3 justify-center items-center border border-slate-300 p-20 rounded-xl">
+        <form
+            onSubmit={(e: SubmitEvent<HTMLFormElement>) => {
+                e.preventDefault()
+                authState === "login"
+                    ? logUser(userData)
+                    : createUser(userData)
+            }}
+            className="flex flex-col gap-3 justify-center items-center border border-slate-300 p-20 rounded-xl">
             <label htmlFor="name" className=" w-full text-4xl">Name</label>
             <input
                 onChange={(e) => {
@@ -39,7 +66,9 @@ const Auth = () => {
                     {showPass ? <Eye size={20} /> : <EyeClosed size={20} />}
                 </span>
             </div>
-            <button className="cursor-pointer hover:bg-slate-200 border-2 border-slate-200 focus:border-slate-5000 rounded-lg w-auto px-10 py-1">{authState}</button>
+            <button
+                type="submit"
+                className="cursor-pointer hover:bg-slate-200 border-2 border-slate-200 focus:border-slate-5000 rounded-lg w-auto px-10 py-1">{authState}</button>
             <span onClick={() => {
                 authState === "login" ? setAuthState("signup") : setAuthState("login")
             }} className=" w-full cursor-pointer">

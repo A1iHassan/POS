@@ -15,6 +15,13 @@
       "when": 1779292203391,
       "tag": "0001_loving_purple_man",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1779474800107,
+      "tag": "0002_dizzy_norman_osborn",
+      "breakpoints": true
     }
   ]
 }

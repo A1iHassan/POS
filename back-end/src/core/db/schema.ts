@@ -11,7 +11,7 @@ export const products = pgTable('products', {
 export const users = pgTable('users', {
     id: uuid('id').primaryKey().defaultRandom(),
     name: text('name').notNull(),
-    password: text('name').notNull()
+    password: text('password').notNull()
 })
 
 export type Products = typeof products.$inferSelect;

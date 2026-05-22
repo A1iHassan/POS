@@ -15,7 +15,7 @@ export class AuthService {
     async addNewUser(payload: NewUser) {
         const users = await this.db.select().from(schema.users).where(eq(schema.users.name, payload.name))
         if (users.length > 0) throw BadRequestException
-        payload.password = hash(payload.password, 20)
-        return await this.db.insert(schema.users).values(payload).returning({ name: schema.users.name })
+        payload.password = await hash(payload.password, 20)
+        return await this.db.insert(schema.users).values({ name: payload.name, password: payload.password }).returning({ name: schema.users.name })
     }
 }
