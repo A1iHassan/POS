@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { useState, type ChangeEvent } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { productsApi } from "../data/productsData";
+import { productsApi } from "../api/productsData";
 import type { Products } from "../data/types";
 
 export default function Inventory() {
@@ -153,19 +153,19 @@ export default function Inventory() {
           <table className="w-full border-collapse">
             <thead className="sticky top-0 bg-surface-container-high z-10 shadow-sm">
               <tr>
-                <th className="w-100 px-4 py-3 text-left text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant border-b border-outline-variant/20 font-body">
+                <th className="w-100 px-4 py-3 text-left text-[10px] font-bold uppercase tracking-widest text-on-surface-variant border-b border-outline-variant/20 font-body">
                   Barcode
                 </th>
-                <th className="w-120 px-4 py-3 text-left text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant border-b border-outline-variant/20 font-body">
+                <th className="w-120 px-4 py-3 text-left text-[10px] font-bold uppercase tracking-widest text-on-surface-variant border-b border-outline-variant/20 font-body">
                   Name
                 </th>
-                <th className="w-50 px-4 py-3 text-left text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant border-b border-outline-variant/20 font-body">
+                <th className="w-50 px-4 py-3 text-left text-[10px] font-bold uppercase tracking-widest text-on-surface-variant border-b border-outline-variant/20 font-body">
                   Quantity
                 </th>
-                <th className="px-4 py-3 text-right text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant border-b border-outline-variant/20 font-body">
+                <th className="px-4 py-3 text-right text-[10px] font-bold uppercase tracking-widest text-on-surface-variant border-b border-outline-variant/20 font-body">
                   Expiry
                 </th>
-                <th className="w-16 px-4 py-3 text-right text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant border-b border-outline-variant/20 font-body">
+                <th className="w-16 px-4 py-3 text-right text-[10px] font-bold uppercase tracking-widest text-on-surface-variant border-b border-outline-variant/20 font-body">
                   Controls
                 </th>
               </tr>
