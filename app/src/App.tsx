@@ -21,9 +21,9 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Routes>
+        <Route path="/auth" element={<Auth />} />
         <Route element={<AppLayout />}>
           <Route path="/" element={<Checkout />} />
-          <Route path="/auth" element={<Auth />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/transactions" element={<Transactions />} />
           <Route path="/inventory" element={<Inventory />} />
