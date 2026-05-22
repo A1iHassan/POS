@@ -14,12 +14,15 @@ const Auth = () => {
     const [showPass, setShowPass] = useState<boolean>(false)
     const [userData, setUserData] = useState<NewUser>({ name: "", password: "" })
     console.log(userData)
-    const timeoutRef = useRef(null)
+    const timeoutRef = useRef(0)
     const navigate = useNavigate()
 
     const { mutate: createUser } = useMutation({
         mutationFn: async (payload: NewUser) => { await authApi.post("/signup", payload) },
-        onSuccess: () => alert("User created successfully"),
+        onSuccess: () => {
+            alert("User created successfully ... now you can log in with your new credentials")
+            setAuthState("login")
+        },
         onError: () => alert("Failed to create user ... try again later")
     })
 
