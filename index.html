@@ -163,6 +163,128 @@
             font-weight: 300;
             color: #666;
         }
+
+        /* Mobile Scanner Section */
+        .mobile-scanner-section {
+            padding: 8rem 0;
+            border-top: 1px solid var(--accent);
+        }
+
+        .scanner-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .scanner-label {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #999;
+            border: 1px solid var(--accent);
+            padding: 0.4rem 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .scanner-header h2 {
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: #222;
+            margin-bottom: 1rem;
+        }
+
+        .scanner-header p {
+            font-size: 1.15rem;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+            color: #777;
+        }
+
+        .scanner-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .scanner-visual {
+            position: relative;
+        }
+
+        .scanner-visual img {
+            width: 100%;
+            display: block;
+            border-radius: 12px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.06);
+        }
+
+        .scanner-details h3 {
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: #222;
+            margin-bottom: 1rem;
+        }
+
+        .scanner-details p {
+            font-size: 1.05rem;
+            font-weight: 300;
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .scanner-steps {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .scanner-steps li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            font-size: 1rem;
+            font-weight: 300;
+            color: #555;
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--accent);
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #222;
+        }
+
+        .scanner-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .scanner-tag {
+            padding: 0.45rem 1rem;
+            background: transparent;
+            border: 1px solid var(--accent);
+            font-size: 0.85rem;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+
+        .scanner-tag:hover {
+            background: var(--text);
+            color: var(--bg);
+            border-color: var(--text);
+        }
     </style>
 </head>
 
@@ -230,6 +352,44 @@
                     into the background.</p>
             </div>
         </div>
+
+        <section class="mobile-scanner-section" id="mobile-scanner">
+            <div class="scanner-header">
+                <span class="scanner-label">New Feature</span>
+                <h2>Your Phone is the Scanner</h2>
+                <p>Ditch the dedicated hardware. Turn any mobile phone into a powerful barcode and QR code scanner, connected directly to your POS terminal.</p>
+            </div>
+            <div class="scanner-content">
+                <div class="scanner-visual">
+                    <img src="../images/mobile-scanner.png" alt="Mobile phone scanning a barcode">
+                </div>
+                <div class="scanner-details">
+                    <h3>How It Works</h3>
+                    <p>Open the companion scanner on any smartphone browser — no app install needed. Pair it with your terminal session and start scanning instantly.</p>
+                    <ul class="scanner-steps">
+                        <li>
+                            <span class="step-number">1</span>
+                            <span>Open the scanner URL on your phone's browser</span>
+                        </li>
+                        <li>
+                            <span class="step-number">2</span>
+                            <span>Pair with your active POS terminal session</span>
+                        </li>
+                        <li>
+                            <span class="step-number">3</span>
+                            <span>Point your camera at any barcode or QR code to scan</span>
+                        </li>
+                    </ul>
+                    <div class="scanner-tags">
+                        <span class="scanner-tag">UPC / EAN</span>
+                        <span class="scanner-tag">QR Codes</span>
+                        <span class="scanner-tag">Code 128</span>
+                        <span class="scanner-tag">No App Required</span>
+                        <span class="scanner-tag">Real-time Sync</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
     </main>
 
